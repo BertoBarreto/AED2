@@ -243,6 +243,24 @@ int StockParts(PARTS *lst, int contador)
         return contador;
 }
 
+void Menu(PARTS* parts_list,SETS *sets_list,RELATIONS *relations_list){
+    int option;
+    printf("\n****************************");
+    printf("\n** 1-Total parts in stock **");
+    printf("\n****************************");
+    printf("\nOption: ");
+    scanf("%d", &option);
+    switch (option)
+    {
+    case 1:
+        printf("\nParts in stock: %d parts", StockParts(parts_list, 0));
+        break;
+    
+    default:
+        break;
+    }
+}
+
 void main()
 {
     PARTS *parts_list = NULL;
@@ -253,10 +271,5 @@ void main()
     sets_list = OpenSets(sets_list);
     relations_list = OpenRelations(relations_list);
     printf("\nDone!");
-    //ListParts(parts_list);
-    //ListSets(sets_list);
-    ListRelations(relations_list);
-
-    printf("\n%d", StockParts(parts_list, 0));
-    //ListSets(sets_list);
+    Menu(parts_list,sets_list,relations_list);
 }
