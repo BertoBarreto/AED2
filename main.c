@@ -21,10 +21,27 @@ typedef struct _sets
     struct _sets *next;
 } SETS;
 
+<<<<<<< HEAD
 PARTS *OpenParts(PARTS *parts);
 PARTS *InsertPart(PARTS *lst, char *part_num, char *name, char *class, int stock);
 SETS *OpenSets(SETS *sets);
 SETS *InsertSet(SETS *lst, char *set_num, char *name, int year, char *theme);
+=======
+typedef struct _relations
+{
+    char set_num[100];
+    char part_num[100];
+    int quantity;
+    struct _relations* next;
+}RELATIONS;
+
+PARTS* OpenParts(PARTS* parts);
+PARTS *InsertPart(PARTS *lst, char* part_num,char* name,char* class,int stock);
+SETS* OpenSets(SETS* sets);
+SETS *InsertSet(SETS *lst, char* set_num,char* name,int year,char* theme);
+RELATIONS* OpenRelations(RELATIONS* relations);
+RELATIONS *InsertRelation(RELATIONS *lst, char* set_num,int quantity,char* part_num);
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
 
 PARTS *OpenParts(PARTS *parts)
 {
@@ -37,6 +54,7 @@ PARTS *OpenParts(PARTS *parts)
     int stock;
     PARTS *new_part = (PARTS *)malloc(sizeof(PARTS));
     assert(new_part);
+<<<<<<< HEAD
 
     if (fp = fopen("LEGO-DataSet/parts.tsv", "r"))
     {
@@ -53,6 +71,22 @@ PARTS *OpenParts(PARTS *parts)
             {
                 fscanf(fp, "%[^\t]\t%[^\t]\t%[^\t]\t%d\n", part_num, name, class, &stock);
                 parts = InsertPart(parts, part_num, name, class, stock);
+=======
+    
+    if(fp = fopen("LEGO-DataSet/parts.tsv","r")){
+        printf("\nGetting parts list...");
+        while (!feof(fp))
+        {
+            
+            if(i==0){
+                fscanf(fp,"%[^\n]\n",trash);
+                //printf("Trash:%s",trash);
+            }
+            else if(i>0){
+                
+                fscanf(fp,"%[^\t]\t%[^\t]\t%[^\t]\t%d\n", part_num,name,class,&stock);
+                parts = InsertPart(parts,part_num,name,class,stock);
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
                 strcpy(new_part->part_num, part_num);
                 strcpy(new_part->name, name);
                 strcpy(new_part->class, class);
@@ -76,6 +110,7 @@ SETS *OpenSets(SETS *sets)
     int year;
     SETS *new_set = (SETS *)malloc(sizeof(SETS));
     assert(new_set);
+<<<<<<< HEAD
 
     if (fp = fopen("LEGO-DataSet/sets.tsv", "r"))
     {
@@ -92,6 +127,22 @@ SETS *OpenSets(SETS *sets)
             {
                 fscanf(fp, "%[^\t]\t%[^\t]\t%d\t%[^\n]\n", set_num, name, &year, theme);
                 sets = InsertSet(sets, set_num, name, year, theme);
+=======
+    
+    if(fp = fopen("LEGO-DataSet/sets.tsv","r")){
+        printf("\nGetting sets list...");
+        while (!feof(fp))
+        {
+            
+            if(i==0){
+                fscanf(fp,"%[^\n]\n",trash);
+               // printf("Trash:%s",trash);
+            }
+            else if(i>0){
+                
+                fscanf(fp,"%[^\t]\t%[^\t]\t%d\t%[^\n]\n", set_num,name,&year,theme);
+                sets = InsertSet(sets,set_num,name,year,theme);
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
                 strcpy(new_set->set_num, set_num);
                 strcpy(new_set->name, name);
                 strcpy(new_set->theme, theme);
@@ -104,8 +155,48 @@ SETS *OpenSets(SETS *sets)
     return new_set;
 }
 
+<<<<<<< HEAD
 PARTS *InsertPart(PARTS *lst, char *part_num, char *name, char *class, int stock)
 {
+=======
+RELATIONS* OpenRelations(RELATIONS* relations){
+    FILE *fp;
+    int i=0;
+    char trash[1000];
+    char set_num[100];
+    char part_num[100];
+    int quantity;
+    RELATIONS* new_relation = (RELATIONS*) malloc(sizeof(RELATIONS));
+    assert(new_relation);
+    
+    if(fp = fopen("LEGO-DataSet/parts_sets.tsv","r")){
+        printf("\nGetting relations list...");
+        while (!feof(fp))
+        {
+            
+            if(i==0){
+                fscanf(fp,"%[^\n]\n",trash);
+                //printf("Trash:%s",trash);
+            }
+            else if(i>0){
+                
+                fscanf(fp,"%[^\t]\t%d\t%[^\n]\n", set_num,&quantity,part_num);
+                relations = InsertRelation(relations,set_num,quantity,part_num);
+                strcpy(new_relation->set_num, set_num);
+                strcpy(new_relation->part_num, part_num);
+                new_relation->quantity = quantity;
+                new_relation->next = relations;
+            }
+            i++;    
+
+        }
+        
+    }
+    return new_relation;
+}
+
+PARTS *InsertPart(PARTS *lst, char* part_num,char* name,char* class,int stock) {
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
     assert(part_num);
     assert(name);
     assert(class);
@@ -140,25 +231,52 @@ SETS *InsertSet(SETS *lst, char *set_num, char *name, int year, char *theme)
     return new_set;
 }
 
+<<<<<<< HEAD
 void ListParts(PARTS *lst)
 {
     if (lst)
     {
+=======
+RELATIONS *InsertRelation(RELATIONS *lst, char* set_num,int quantity,char* part_num) {
+    assert(set_num);
+    assert(part_num);
+
+    RELATIONS *new_relation = (RELATIONS*) malloc(sizeof(RELATIONS));
+    assert(new_relation);
+
+    strcpy(new_relation->set_num, set_num);
+    strcpy(new_relation->part_num, part_num);
+    new_relation->quantity = quantity;
+    new_relation->next = lst;
+
+    return new_relation;
+}
+
+void ListParts(PARTS *lst) {
+    if (lst) {
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
         printf("%20s - %s\n", lst->part_num, lst->name);
         ListParts(lst->next);
     }
 }
 
+<<<<<<< HEAD
 void ListSets(SETS *lst)
 {
     if (lst)
     {
         printf("%s - %s\n", lst->set_num, lst->name);
+=======
+void ListSets(SETS *lst) {
+    if (lst) {
+        printf("%20s - %s\n", lst->set_num, lst->name);
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
         ListSets(lst->next);
     }
 }
 int StockParts(PARTS *lst, int contador)
 
+<<<<<<< HEAD
 {
     if (lst)
     {
@@ -173,10 +291,32 @@ void main()
 {
     PARTS *parts_list = NULL;
     SETS *sets_list = NULL;
+=======
+void ListRelations(RELATIONS *lst) {
+    if (lst) {
+        printf("%20s - %s\n", lst->set_num, lst->part_num);
+        ListRelations(lst->next);
+    }
+}
 
+void main(){
+    PARTS* parts_list = NULL;
+    SETS* sets_list = NULL;
+    RELATIONS* relations_list = NULL;
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
+
+    
     parts_list = OpenParts(parts_list);
     sets_list = OpenSets(sets_list);
+<<<<<<< HEAD
     //ListParts(parts_list);
+=======
+    relations_list = OpenRelations(relations_list);
+    printf("\nDone!");
+    //ListParts(parts_list);
+    //ListSets(sets_list);
+    ListRelations(relations_list);
+>>>>>>> b830b0593269ec900b4cf3939e7668fe40df2e05
 
     printf("\n%d", StockParts(parts_list, 0));
     //ListSets(sets_list);
