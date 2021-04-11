@@ -80,6 +80,10 @@ SETS *OpenSets(SETS *sets)
         {
             fscanf(fp, "%[^\t]\t%[^\t]\t%d\t%[^\n]\n", set_num, name, &year, theme);
             new_set = InsertSet(new_set, set_num, name, year, theme);
+            if (strcmp(set_num, "7922-1") == 0)
+            {
+                printf("\nSet: %20s", set_num);
+            }
         }
     }
     fclose(fp);
