@@ -37,7 +37,10 @@ SETS *InsertSet(SETS *lst, char *set_num, char *name, int year, char *theme);
 RELATIONS *OpenRelations(RELATIONS *relations);
 RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *part_num);
 PARTS *SearchPartsByClassAndNum(PARTS *parts, char *part_num, char *class);
-
+SETS *SearchSetbyTheme(SETS *lst, char *theme);
+PARTS *OpenParts(PARTS *parts);
+SETS *OrderSetbyYear(SETS *lst);
+void swap(SETS *a, SETS *b);
 PARTS *OpenParts(PARTS *parts)
 {
     FILE *fp;
@@ -179,7 +182,15 @@ void ListSets(SETS *lst)
 {
     if (lst)
     {
-        printf("%20s - %s\n", lst->set_num, lst->name);
+        printf("%20s - %d\n", lst->theme, lst->year);
+        ListSets(lst->next);
+    }
+}
+void ListSetsNTY(SETS *lst)
+{
+    if (lst)
+    {
+        printf("%20s - %20s - %d\n", lst->name, lst->theme, lst->year);
         ListSets(lst->next);
     }
 }
@@ -260,18 +271,74 @@ SETS *SetsSearchByNum(SETS *sets, char *set_num)
         return SetsSearchByNum(sets->next, set_num);
     }
 }
+SETS *SearchSetbyTheme(SETS *lst, char *theme)
+{
+    SETS *search = NULL;
+
+    for (; lst; lst = lst->next)
+    {
+        if (strcmp(theme, lst->theme) == 0)
+        {
+            printf("\nSet: %20s-%20s", lst->set_num, lst->theme);
+            search = InsertSet(search, lst->set_num, lst->name, lst->year, lst->theme);
+        }
+    }
+    return search;
+}
+SETS *OrderSetbyYear(SETS *lst)
+{
+
+    int swapped, i;
+    SETS *ptr1;
+    SETS *lptr = NULL;
+
+    if (lst == NULL)
+        return lst;
+
+    do
+    {
+        swapped = 0;
+        ptr1 = lst;
+
+        while (ptr1->next != lptr)
+        {
+            if (ptr1->year > ptr1->next->year)
+            {
+                swap(ptr1, ptr1->next);
+                swapped = 1;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    } while (swapped);
+}
+void swap(SETS *a, SETS *b)
+{
+    SETS *temp = a;
+    strcpy(a->set_num, b->set_num);
+    strcpy(a->name, b->name);
+    strcpy(a->theme, b->theme);
+    a->year = b->year;
+
+    strcpy(b->set_num, temp->set_num);
+    strcpy(b->name, temp->name);
+    strcpy(b->theme, temp->theme);
+    b->year = temp->year;
+}
 
 void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 {
     int option;
-    char part_class[100], set_num[100];
-    PARTS *search = NULL;
+    char part_class[100], set_num[100], theme[100];
+    PARTS *search_parts = NULL;
+    SETS *search_sets = NULL;
     bool exit = false;
     while (exit != true)
     {
         printf("\n*************************************");
         printf("\n** 1-Total parts in stock          **");
         printf("\n** 2-Search by part class and set  **");
+        printf("\n** 3-Search by theme               **");
         printf("\n** 0-Exit                          **");
         printf("\n*************************************");
         printf("\nOption: ");
@@ -293,10 +360,19 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             //searchPart(parts_list, part_class);
             //SearchRelations(relations_list, set_num);
             //SearchRelations(relations_list, set_num);
-            search = PartsSearchByClassAndSet(parts_list, SearchRelations(relations_list, set_num), part_class);
+            search_parts = PartsSearchByClassAndSet(parts_list, SearchRelations(relations_list, set_num), part_class);
 
-            ListParts(search);
+            ListParts(search_parts);
             break;
+        case 3:
+            fflush(stdin);
+            printf("\n Theme to search: ");
+            scanf("%[^\n]", theme);
+            search_sets = OrderSetbyYear(SearchSetbyTheme(sets_list, theme));
+            ListSetsNTY(search_sets);
+
+            break;
+
         case 0:
             exit = true;
             break;
@@ -316,6 +392,7 @@ void main()
     parts_list = OpenParts(parts_list);
     sets_list = OpenSets(sets_list);
     relations_list = OpenRelations(relations_list);
+
     printf("\nDone!");
     //ListParts(parts_list);
     Menu(parts_list, sets_list, relations_list);
