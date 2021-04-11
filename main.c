@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 typedef struct _parts
 {
@@ -39,8 +40,10 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
 PARTS *SearchPartsByClassAndNum(PARTS *parts, char *part_num, char *class);
 SETS *SearchSetbyTheme(SETS *lst, char *theme);
 PARTS *OpenParts(PARTS *parts);
-SETS *OrderSetbyYear(SETS *lst);
+void OrderSetbyYear(SETS *lst);
 void swap(SETS *a, SETS *b);
+void LowerString(char *string);
+
 PARTS *OpenParts(PARTS *parts)
 {
     FILE *fp;
@@ -190,8 +193,8 @@ void ListSetsNTY(SETS *lst)
 {
     if (lst)
     {
-        printf("%20s - %20s - %d\n", lst->name, lst->theme, lst->year);
-        ListSets(lst->next);
+        printf("\n%20s - %20s - %d", lst->name, lst->theme, lst->year);
+        ListSetsNTY(lst->next);
     }
 }
 
@@ -271,21 +274,24 @@ SETS *SetsSearchByNum(SETS *sets, char *set_num)
         return SetsSearchByNum(sets->next, set_num);
     }
 }
+
 SETS *SearchSetbyTheme(SETS *lst, char *theme)
 {
     SETS *search = NULL;
-
+    char set_theme[500];
     for (; lst; lst = lst->next)
     {
-        if (strcmp(theme, lst->theme) == 0)
+        strcpy(set_theme, lst->theme);
+        LowerString(set_theme);
+        if (strcmp(theme, set_theme) == 0)
         {
-            printf("\nSet: %20s-%20s", lst->set_num, lst->theme);
             search = InsertSet(search, lst->set_num, lst->name, lst->year, lst->theme);
         }
     }
     return search;
 }
-SETS *OrderSetbyYear(SETS *lst)
+
+void OrderSetbyYear(SETS *lst)
 {
 
     int swapped, i;
@@ -293,7 +299,7 @@ SETS *OrderSetbyYear(SETS *lst)
     SETS *lptr = NULL;
 
     if (lst == NULL)
-        return lst;
+        return;
 
     do
     {
@@ -312,18 +318,38 @@ SETS *OrderSetbyYear(SETS *lst)
         lptr = ptr1;
     } while (swapped);
 }
+
+void LowerString(char *string)
+{
+    char c;
+    for (int i = 0; string[i] != '\0'; i++)
+    {
+        string[i] = tolower(string[i]);
+        //= c;
+    }
+}
+
 void swap(SETS *a, SETS *b)
 {
-    SETS *temp = a;
+    char set_num[100];
+    char name[500];
+    char theme[500];
+    int year;
+
+    strcpy(set_num, a->set_num);
+    strcpy(name, a->name);
+    strcpy(theme, a->theme);
+    year = a->year;
+
     strcpy(a->set_num, b->set_num);
     strcpy(a->name, b->name);
     strcpy(a->theme, b->theme);
     a->year = b->year;
 
-    strcpy(b->set_num, temp->set_num);
-    strcpy(b->name, temp->name);
-    strcpy(b->theme, temp->theme);
-    b->year = temp->year;
+    strcpy(b->set_num, set_num);
+    strcpy(b->name, name);
+    strcpy(b->theme, theme);
+    b->year = year;
 }
 
 void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
@@ -368,7 +394,15 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             fflush(stdin);
             printf("\n Theme to search: ");
             scanf("%[^\n]", theme);
-            search_sets = OrderSetbyYear(SearchSetbyTheme(sets_list, theme));
+
+            LowerString(theme);
+
+            search_sets = SearchSetbyTheme(sets_list, theme);
+
+            printf("\n Ordering...");
+            OrderSetbyYear(search_sets);
+
+            printf("\nList");
             ListSetsNTY(search_sets);
 
             break;
