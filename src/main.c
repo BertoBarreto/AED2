@@ -92,6 +92,8 @@ void main()
     relations_list = OpenRelations(relations_list);
 
     printf("\nDone!");
+    RemoveSetsbyTheme(sets_list, "Castle");
+    ListSets(sets_list);
 
     Menu(parts_list, sets_list, relations_list);
 }

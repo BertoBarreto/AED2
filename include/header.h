@@ -39,5 +39,6 @@ void swap(SETS *a, SETS *b);
 void LowerString(char *string);
 void OrderSetbyYear(SETS *lst);
 int StockParts(PARTS *lst, int counter);
+void RemoveSetsbyTheme(SETS *lst, const char *theme);
 
 #endif
