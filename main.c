@@ -41,6 +41,7 @@ SETS *SearchSetbyTheme(SETS *lst, char *theme);
 PARTS *OpenParts(PARTS *parts);
 SETS *OrderSetbyYear(SETS *lst);
 void swap(SETS *a, SETS *b);
+SETS *removerSets(SETS *sets_list, int key);
 PARTS *OpenParts(PARTS *parts)
 {
     FILE *fp;
@@ -320,6 +321,30 @@ void swap(SETS *a, SETS *b)
     strcpy(b->name, temp->name);
     strcpy(b->theme, temp->theme);
     b->year = temp->year;
+}
+SETS *removerSets(SETS *sets_lst, int key)
+{
+    SETS *aux = sets_lst;
+
+    while (aux)
+    {
+        if (aux->set_num == key)
+        {
+
+            if (aux->next)
+                aux->next->set_num = aux->previous;
+
+            if (aux->set_num)
+                aux->set_num->next = aux->next;
+            else
+                set_num = aux->next;
+
+            ListSets(aux);
+            break;
+        }
+        aux = aux->next;
+    }
+    return set_num;
 }
 
 void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
