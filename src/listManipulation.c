@@ -130,3 +130,26 @@ void swap(SETS *a, SETS *b)
     strcpy(b->theme, theme);
     b->year = year;
 }
+
+void RemoveSetsbyTheme(SETS *lst, const char *theme)
+{
+    if (theme && lst)
+    {
+        for (; lst; lst = lst->next)
+        {
+
+            if (strcmp(lst->theme, theme) == 0)
+            {
+                SETS *next = lst->next;
+                free(lst->theme);
+                free(lst->name);
+                free(lst->set_num);
+                free(lst);
+            }
+        }
+    }
+    else
+    {
+        return;
+    }
+}
