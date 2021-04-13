@@ -14,7 +14,8 @@ PARTS *InsertPart(PARTS *lst, char *part_num, char *name, char *part_class, int 
     assert(name);
     assert(part_class);
 
-    PARTS *new_part = (PARTS *)malloc(sizeof(PARTS));
+    PARTS *new_part, *aux;
+    new_part = (PARTS *)malloc(sizeof(PARTS));
     assert(new_part);
 
     strcpy(new_part->part_num, part_num);
@@ -22,6 +23,9 @@ PARTS *InsertPart(PARTS *lst, char *part_num, char *name, char *part_class, int 
     strcpy(new_part->class, part_class);
     new_part->stock = stock;
     new_part->next = lst;
+    if (new_part->next)
+        new_part->next->previous = new_part;
+    new_part->previous = NULL;
 
     return new_part;
 }
@@ -32,7 +36,8 @@ SETS *InsertSet(SETS *lst, char *set_num, char *name, int year, char *theme)
     assert(name);
     assert(theme);
 
-    SETS *new_set = (SETS *)malloc(sizeof(SETS));
+    SETS *new_set, *aux;
+    new_set = (SETS *)malloc(sizeof(SETS));
     assert(new_set);
 
     strcpy(new_set->set_num, set_num);
@@ -40,6 +45,9 @@ SETS *InsertSet(SETS *lst, char *set_num, char *name, int year, char *theme)
     strcpy(new_set->theme, theme);
     new_set->year = year;
     new_set->next = lst;
+    if (new_set->next)
+        new_set->next->previous = new_set;
+    new_set->previous = NULL;
 
     return new_set;
 }
@@ -49,13 +57,17 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
     assert(set_num);
     assert(part_num);
 
-    RELATIONS *new_relation = (RELATIONS *)malloc(sizeof(RELATIONS));
+    RELATIONS *new_relation, *aux;
+    new_relation = (RELATIONS *)malloc(sizeof(RELATIONS));
     assert(new_relation);
 
     strcpy(new_relation->set_num, set_num);
     strcpy(new_relation->part_num, part_num);
     new_relation->quantity = quantity;
     new_relation->next = lst;
+    if (new_relation->next)
+        new_relation->next->previous = new_relation;
+    new_relation->previous = NULL;
 
     return new_relation;
 }
@@ -88,13 +100,15 @@ void OrderSetbyYear(SETS *lst)
     } while (swapped);
 }
 
-void LowerString(char *string)
+char *LowerString(char *string)
 {
     char c;
-    for (int i = 0; string[i] != '\0'; i++)
+    char *aux = string;
+    for (int i = 0; aux[i] != '\0'; i++)
     {
-        string[i] = tolower(string[i]);
+        aux[i] = tolower(aux[i]);
     }
+    return aux;
 }
 
 int StockParts(PARTS *lst, int counter)
@@ -131,25 +145,40 @@ void swap(SETS *a, SETS *b)
     b->year = year;
 }
 
-void RemoveSetsbyTheme(SETS *lst, const char *theme)
+SETS *DeleteSetsNode(SETS *node)
 {
-    if (theme && lst)
-    {
-        for (; lst; lst = lst->next)
-        {
+    SETS *toDelete = node;
+    node = toDelete->next;
+    free(toDelete);
 
-            if (strcmp(lst->theme, theme) == 0)
-            {
-                SETS *next = lst->next;
-                free(lst->theme);
-                free(lst->name);
-                free(lst->set_num);
-                free(lst);
-            }
+    return node;
+}
+
+SETS *RemoveSetsbyTheme(SETS *lst, const char *theme)
+{
+    SETS *aux = lst;
+    char aux_theme[500];
+
+    while (aux)
+    {
+        strcpy(aux_theme, aux->theme);
+        LowerString(aux_theme);
+        if (strcmp(aux_theme, theme) == 0)
+        {                  // aux é o nodo a remover
+            if (aux->next) // não último nodo
+                aux->next->previous = aux->previous;
+
+            if (aux->previous) // não é o primeiro nodo!
+                aux->previous->next = aux->next;
+            else                 // é o primeiro nodo
+                lst = aux->next; // apenas no caso de ser o 1º
+
+            aux = DeleteSetsNode(aux);
+        }
+        else
+        {
+            aux = aux->next;
         }
     }
-    else
-    {
-        return;
-    }
+    return lst;
 }

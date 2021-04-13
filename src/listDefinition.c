@@ -1,5 +1,6 @@
 typedef struct _parts
 {
+    struct _parts *previous;
     char part_num[100];
     char name[500];
     char class[500];
@@ -9,6 +10,7 @@ typedef struct _parts
 
 typedef struct _sets
 {
+    struct _sets *previous;
     char set_num[100];
     char name[500];
     int year;
@@ -18,6 +20,7 @@ typedef struct _sets
 
 typedef struct _relations
 {
+    struct _relations *previous;
     char set_num[100];
     char part_num[100];
     int quantity;
