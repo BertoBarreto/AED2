@@ -71,7 +71,13 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
 
     return new_relation;
 }
-
+/*
+SETS* Stock_changing(lst *s, int v) {
+    SETS *new = (SETS*) malloc(sizeof(SETS));
+    new->value = v;
+    new->next = s;
+    return new;
+*/
 void OrderSetbyYear(SETS *lst)
 {
 
