@@ -14,9 +14,7 @@ PARTS *InsertPart(PARTS *lst, char *part_num, char *name, char *part_class, int 
     assert(name);
     assert(part_class);
 
-    PARTS *new_part, *aux;
-    new_part = (PARTS *)malloc(sizeof(PARTS));
-    assert(new_part);
+    PARTS *new_part = (PARTS *)malloc(sizeof(PARTS));
 
     strcpy(new_part->part_num, part_num);
     strcpy(new_part->name, name);
@@ -36,19 +34,17 @@ SETS *InsertSet(SETS *lst, char *set_num, char *name, int year, char *theme)
     assert(name);
     assert(theme);
 
-    SETS *new_set, *aux;
-    new_set = (SETS *)malloc(sizeof(SETS));
-    assert(new_set);
+    SETS *new_set = (SETS *)malloc(sizeof(SETS));
 
     strcpy(new_set->set_num, set_num);
     strcpy(new_set->name, name);
     strcpy(new_set->theme, theme);
     new_set->year = year;
+
     new_set->next = lst;
     if (new_set->next)
         new_set->next->previous = new_set;
     new_set->previous = NULL;
-
     return new_set;
 }
 
@@ -57,9 +53,7 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
     assert(set_num);
     assert(part_num);
 
-    RELATIONS *new_relation, *aux;
-    new_relation = (RELATIONS *)malloc(sizeof(RELATIONS));
-    assert(new_relation);
+    RELATIONS *new_relation = (RELATIONS *)malloc(sizeof(RELATIONS));
 
     strcpy(new_relation->set_num, set_num);
     strcpy(new_relation->part_num, part_num);
@@ -157,13 +151,10 @@ SETS *DeleteSetsNode(SETS *node)
 SETS *RemoveSetsbyTheme(SETS *lst, const char *theme)
 {
     SETS *aux = lst;
-    char aux_theme[500];
 
     while (aux)
     {
-        strcpy(aux_theme, aux->theme);
-        LowerString(aux_theme);
-        if (strcmp(aux_theme, theme) == 0)
+        if (strcmp(LowerString(aux->theme), theme) == 0)
         {                  // aux é o nodo a remover
             if (aux->next) // não último nodo
                 aux->next->previous = aux->previous;
@@ -181,4 +172,70 @@ SETS *RemoveSetsbyTheme(SETS *lst, const char *theme)
         }
     }
     return lst;
+}
+
+PARTS *DeletePartsNode(PARTS *node)
+{
+    PARTS *toDelete = node;
+    node = toDelete->next;
+    free(toDelete);
+
+    return node;
+}
+
+PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
+{
+    PARTS *aux = lst;
+    printf("\n%s ", class);
+    while (aux)
+    {
+        if (strcmp(LowerString(aux->class), class) == 0)
+        { // aux é o nodo a remover
+
+            if (aux->next) // não último nodo
+                aux->next->previous = aux->previous;
+
+            if (aux->previous) // não é o primeiro nodo!
+                aux->previous->next = aux->next;
+            else                 // é o primeiro nodo
+                lst = aux->next; // apenas no caso de ser o 1º
+
+            aux = DeletePartsNode(aux);
+        }
+        else
+        {
+            aux = aux->next;
+        }
+    }
+    return lst;
+}
+
+int ContPartOccur(RELATIONS *lst, char *part_num)
+{
+    int count = 0;
+    for (; lst; lst = lst->next)
+    {
+        if (strcmp(lst->part_num, part_num) == 0)
+        {
+            count += 1;
+        }
+    }
+    return count;
+}
+
+PARTS *HighestOccur(PARTS *lst, RELATIONS *rel_lst)
+{
+    int highest = 0, count = 0;
+    PARTS *search = NULL;
+    for (; lst; lst = lst->next)
+    {
+        count = ContPartOccur(rel_lst, lst->part_num);
+        if (count > highest)
+        {
+            highest = count;
+            printf("\nHighest: %d", highest);
+            search = lst;
+        }
+    }
+    return search;
 }
