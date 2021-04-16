@@ -10,8 +10,7 @@ PARTS *OpenParts(PARTS *parts)
     char name[500];
     char class[500];
     int stock;
-    PARTS *new_part = (PARTS *)malloc(sizeof(PARTS));
-    assert(new_part);
+    PARTS *new_part = NULL;
 
     if (fp = fopen("LEGO-DataSet/parts.tsv", "r"))
     {
@@ -34,8 +33,7 @@ SETS *OpenSets(SETS *sets)
     char name[500];
     char theme[500];
     int year;
-    SETS *new_set = (SETS *)malloc(sizeof(SETS));
-    assert(new_set);
+    SETS *new_set = NULL;
 
     if (fp = fopen("LEGO-DataSet/sets.tsv", "r"))
     {
@@ -57,8 +55,7 @@ RELATIONS *OpenRelations(RELATIONS *relations)
     char set_num[100];
     char part_num[100];
     int quantity;
-    RELATIONS *new_relation = (RELATIONS *)malloc(sizeof(RELATIONS));
-    assert(new_relation);
+    RELATIONS *new_relation = NULL;
 
     if (fp = fopen("LEGO-DataSet/parts_sets.tsv", "r"))
     {

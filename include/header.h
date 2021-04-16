@@ -15,6 +15,7 @@ RELATIONS *OpenRelations(RELATIONS *relations);
  ************************/
 PARTS *InsertPart(PARTS *lst, char *part_num, char *name, char *class, int stock);
 SETS *InsertSet(SETS *lst, char *set_num, char *name, int year, char *theme);
+SETS *InsertSetTeste(SETS *lst, char *set_num, char *name, int year, char *theme, int *counter);
 RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *part_num);
 void swap(SETS *a, SETS *b);
 char *LowerString(char *string);
@@ -22,6 +23,10 @@ void OrderSetbyYear(SETS *lst);
 int StockParts(PARTS *lst, int counter);
 SETS *DeleteSetsNode(SETS *node);
 SETS *RemoveSetsbyTheme(SETS *lst, const char *theme);
+PARTS *DeletePartsNode(PARTS *node);
+PARTS *RemovePartsbyClass(PARTS *lst, const char *class);
+int ContPartOccur(RELATIONS *lst, char *part_num);
+PARTS *HighestOccur(PARTS *lst, RELATIONS *rel_lst);
 
 /************************
  * Search data in lists *
