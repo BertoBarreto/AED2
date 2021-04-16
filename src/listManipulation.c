@@ -66,9 +66,9 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
     return new_relation;
 }
 /*
-SETS* Stock_changing(lst *s, int v) {
+SETS* Stock_changing(lst *s, char theme) {
     SETS *new = (SETS*) malloc(sizeof(SETS));
-    new->value = v;
+    new->value = theme;
     new->next = s;
     return new;
 */
