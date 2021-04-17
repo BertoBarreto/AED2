@@ -323,38 +323,6 @@ PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
     return lst;
 }
 
-int ContPartOccur(RELATIONS *lst, char *part_num)
-{
-    int count = 0;
-    for (; lst; lst = lst->next)
-    {
-        if (strcmp(lst->part_num, part_num) == 0)
-        {
-            count += 1;
-        }
-    }
-    return count;
-}
-
-int countOccurence(RELATIONS *head, char *part_num)
-{
-    int count = 0;
-    RELATIONS *aux = head;
-    for (; aux; aux = aux->next->next->next)
-    {
-        if (strcmp(aux->next->part_num, part_num))
-            count++;
-        if (strcmp(aux->part_num, part_num))
-            count++;
-        if (strcmp(aux->previous->part_num, part_num))
-            count++;
-    }
-
-    return count;
-
-    //O(number of nodes)
-}
-
 char *MaxOccurPart(RELATIONS *rel_lst, PARTS *parts_lst)
 {
     RELATIONS *aux_rel = rel_lst;
