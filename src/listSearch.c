@@ -3,6 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * @brief This function searches parts by part_num and class
+ * 
+ * @param parts ➔ parts list
+ * @param part_num ➔ part_num to search
+ * @param class ➔ class to search
+ * @return PARTS* ➔ Part found
+ */
 PARTS *SearchPartsByNumClass(PARTS *parts, char *part_num, char *class)
 {
     if (!parts)
@@ -20,6 +28,15 @@ PARTS *SearchPartsByNumClass(PARTS *parts, char *part_num, char *class)
     }
 }
 
+/**
+ * @brief This function searches for parts with certain class in a relations list.
+ * @brief This function iterates through all the relations and searches for all the parts with the part_num and class from the relations
+ *  list inserting the parts found in a list and returning the list.
+ * 
+ * @param parts ➔ Parts list
+ * @param rel ➔ Relations list
+ * @return PARTS* ➔ List with all the parts found
+ */
 PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
 {
     PARTS *search = NULL;
@@ -34,6 +51,15 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
     return search;
 }
 
+/**
+ * @brief This function searches for all the parts in a set. 
+ * @brief This function iterates through all the relations and searches for all the parts with the part_num from the relations
+ *  list inserting the parts found in a list and returning the list.
+ * 
+ * @param parts ➔ Parts list
+ * @param rel ➔ Relations list
+ * @return PARTS* ➔ List with all the parts found
+ */
 PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
 {
     PARTS *search = NULL;
@@ -48,6 +74,12 @@ PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
     return search;
 }
 
+/**
+ * @brief This function searches for a part with a part_num in the parts list.
+ * 
+ * @param parts ➔ Parts list
+ * @return PARTS* ➔ Part found 
+ */
 PARTS *SearchPartsByNum(PARTS *parts, char *part_num)
 {
 
@@ -61,6 +93,12 @@ PARTS *SearchPartsByNum(PARTS *parts, char *part_num)
     }
 }
 
+/**
+ * @brief This function searches for a part with a class in the parts list.
+ * 
+ * @param parts ➔ Parts list
+ * @return PARTS* ➔ Part found  
+ */
 PARTS *SearchPartsByClass(PARTS *parts, char *class)
 {
 
@@ -74,6 +112,13 @@ PARTS *SearchPartsByClass(PARTS *parts, char *class)
     }
 }
 
+/**
+ * @brief This function searches for all the relations with a set_num.
+ * 
+ * @param rel ➔ Relations list
+ * @param set_num ➔ The set_num to search for
+ * @return RELATIONS* ➔ List of relations found
+ */
 RELATIONS *SearchRelations(RELATIONS *rel, char *set_num)
 {
     RELATIONS *search = NULL;
@@ -88,6 +133,13 @@ RELATIONS *SearchRelations(RELATIONS *rel, char *set_num)
     return search;
 }
 
+/**
+ * @brief This function searches for a set by its set_num.
+ * 
+ * @param sets ➔ Sets list
+ * @param set_num ➔ set_num to search for
+ * @return SETS* ➔ List of sets found
+ */
 SETS *SetsSearchByNum(SETS *sets, char *set_num)
 {
     if (!sets || set_num == sets->set_num)
@@ -100,20 +152,31 @@ SETS *SetsSearchByNum(SETS *sets, char *set_num)
     }
 }
 
+/**
+ * @brief This function searches for a set by its theme.
+ * 
+ * @param lst ➔ Sets list
+ * @param theme ➔ Theme so search for
+ * @return SETS* ➔ List of sets found
+ */
 SETS *SearchSetbyTheme(SETS *lst, char *theme)
 {
     SETS *search = NULL;
-    char set_theme[500];
     for (; lst; lst = lst->next)
     {
         if (strcmp(theme, LowerString(lst->theme)) == 0)
-        {
             search = InsertSet(search, lst->set_num, lst->name, lst->year, lst->theme);
-        }
     }
     return search;
 }
 
+/**
+ * @brief This function checks if a part class exists by iterating by the parts list and if it founds a part with that class then it returns true.
+ * 
+ * @param lst ➔ Parts list
+ * @return true ➔ If finds a part
+ * @return false ➔ If doesnt find a part
+ */
 bool ExistsClass(PARTS *lst, char *class)
 {
     for (; lst; lst = lst->next)
@@ -124,6 +187,14 @@ bool ExistsClass(PARTS *lst, char *class)
     return false;
 }
 
+/**
+ * @brief This function checks if a set with a specific set_num exists.
+ * 
+ * @param lst ➔ Sets list
+ * @param set_num ➔ set_num to check
+ * @return true ➔ If finds a set
+ * @return false ➔ If doesnt find a set
+ */
 bool ExistsSet(SETS *lst, char *set_num)
 {
     for (; lst; lst = lst->next)
@@ -134,6 +205,14 @@ bool ExistsSet(SETS *lst, char *set_num)
     return false;
 }
 
+/**
+ * @brief This function checks if there is any set with a specific theme.
+ * 
+ * @param lst ➔ Sets list
+ * @param theme ➔ theme to check
+ * @return true ➔ If finds a set
+ * @return false ➔ If doesnt find a set 
+ */
 bool ExistsTheme(SETS *lst, char *theme)
 {
     for (; lst; lst = lst->next)

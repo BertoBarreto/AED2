@@ -12,12 +12,13 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
     SETS *search_sets = NULL;
     RELATIONS *search_relations = NULL;
     bool exit = false, exists = false;
+
     while (exit != true)
     {
         printf("\n**************************************************");
         printf("\n** 1-Total parts in stock                       **");
         printf("\n** 2-Search by part class and set               **");
-        printf("\n** 3-Search parts by set theme ordering by year **");
+        printf("\n** 3-Search set by theme ordered by year        **");
         printf("\n** 4-Delete all sets with specific theme        **");
         printf("\n** 5-Total parts in a set                       **");
         printf("\n** 6-See all the parts in a set                 **");
@@ -87,8 +88,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             }
 
             search_sets = SearchSetbyTheme(sets_list, LowerString(theme));
-
-            if (search_parts)
+            if (search_sets)
             {
                 OrderSetbyYear(search_sets);
 
@@ -142,11 +142,11 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 scanf("%[^\n]", set_num);
             }
 
-            search_parts = PartsSearchBySet(parts_list, SearchRelations(relations_list, set_num));
+            search_relations = SearchRelations(relations_list, set_num);
 
-            if (search_parts)
+            if (search_relations)
             {
-                printf("\nTotal parts needed: %d parts", StockParts(search_parts, 0));
+                printf("\nTotal parts needed: %d parts", SetPartsQuantity(search_relations, 0));
             }
             else
             {
@@ -169,13 +169,13 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 printf("\n Set number: ");
                 scanf("%[^\n]", set_num);
             }
-
-            search_parts = PartsSearchBySet(parts_list, SearchRelations(relations_list, set_num));
+            search_relations = SearchRelations(relations_list, set_num);
+            search_parts = PartsSearchBySet(parts_list, search_relations);
 
             if (search_parts)
             {
-                printf("\nPart_num    Name    Stock");
-                ListPartsStock(search_parts);
+                printf("\nPart_num    Name  Class   Stock   Quantity");
+                ListPartsAndRelations(search_parts, search_relations);
             }
             else
             {
@@ -214,8 +214,16 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
 #pragma region Remove_Part_by_Class
         case 8:
-            printf("The most used part is:");
-            ListParts(HighestOccur(parts_list, relations_list));
+            printf("The most used part is: ");
+            printf("\n%d", MaxOccurPart(relations_list, parts_list));
+
+            /*search_parts = SearchPartsByNum(parts_list, MaxOccurPart(relations_list));
+            printf("\n%s", search_parts->part_num);
+            printf("\n Part Num: %s", search_parts->part_num);
+            printf("\n Part Name: %s", search_parts->name);
+            printf("\n Part Class: %s", search_parts->class);
+            printf("\n Part Stock: %d", search_parts->stock);*/
+
             break;
 #pragma endregion
         case 0:

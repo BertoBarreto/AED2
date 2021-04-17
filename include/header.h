@@ -42,10 +42,15 @@ PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel);
 bool ExistsClass(PARTS *lst, char *class);
 bool ExistsSet(SETS *lst, char *set_num);
 bool ExistsTheme(SETS *lst, char *theme);
+int SetPartsQuantity(RELATIONS *lst, int counter);
+int StockParts(PARTS *lst, int counter);
+unsigned long Hash(char *s, unsigned long m);
+char *MaxOccurPart(RELATIONS *rel_lst, PARTS *parts_lst);
 
 /**************************
  * list the Data in lists *
  **************************/
+void ListPartsAndRelations(PARTS *lst_parts, RELATIONS *lst_rel);
 void ListParts(PARTS *lst);
 void ListPartsStock(PARTS *lst);
 void ListSets(SETS *lst);
