@@ -1,3 +1,6 @@
+/**
+ * @brief List of Parts.
+ */
 typedef struct _parts
 {
     struct _parts *previous;
@@ -7,7 +10,9 @@ typedef struct _parts
     int stock;
     struct _parts *next;
 } PARTS;
-
+/**
+ * @brief List of Sets.
+ */
 typedef struct _sets
 {
     struct _sets *previous;
@@ -17,7 +22,9 @@ typedef struct _sets
     char theme[500];
     struct _sets *next;
 } SETS;
-
+/**
+ * @brief List of Relations.
+ */
 typedef struct _relations
 {
     struct _relations *previous;

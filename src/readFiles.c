@@ -3,6 +3,15 @@
 #include <assert.h>
 #include <stdlib.h>
 
+/**
+ * @brief This function reads the parts.tsv file and inserts its values in a parts list
+ * @brief This function firstly checks if it can open the files (checking if the file exists), then it uses the fseek function and jumps the first line, after that cycles through
+ * the file reading line by line and storing each line values in a list that is then returned
+ * 
+ * @param parts ➔ The parts list
+ * @see InsertPart
+ * @return PARTS* ➔ list with all the parts from the parts file
+ */
 PARTS *OpenParts(PARTS *parts)
 {
     FILE *fp;
@@ -26,6 +35,15 @@ PARTS *OpenParts(PARTS *parts)
     return new_part;
 }
 
+/**
+ * @brief This function reads the sets.tsv file and inserts its values in a sets list
+ * @brief This function firstly checks if it can open the files (checking if the file exists), then it uses the fseek function and jumps the first line, after that cycles through
+ * the file reading line by line and storing each line values in a list that is then returned
+ * 
+ * @param sets ➔ The sets list
+ * @see InsertSet
+ * @return SETS* ➔ list with all the sets from the sets file
+ */
 SETS *OpenSets(SETS *sets)
 {
     FILE *fp;
@@ -49,6 +67,15 @@ SETS *OpenSets(SETS *sets)
     return new_set;
 }
 
+/**
+ * @brief This function reads the parts_sets.tsv file and inserts its values in a relations list
+ * @brief This function firstly checks if it can open the files (checking if the file exists), then it uses the fseek function and jumps the first line, after that cycles through
+ * the file reading line by line and storing each line values in a list that is then returned
+ * 
+ * @param relations ➔ The relations list
+ * @see InsertRelation
+ * @return RELATIONS* ➔ List with all the relations from the parts_sets file
+ */
 RELATIONS *OpenRelations(RELATIONS *relations)
 {
     FILE *fp;
