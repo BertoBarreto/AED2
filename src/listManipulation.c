@@ -323,33 +323,3 @@ PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
     return lst;
 }
 
-char *MaxOccurPart(RELATIONS *rel_lst, PARTS *parts_lst)
-{
-    RELATIONS *aux_rel = rel_lst;
-    PARTS *aux_parts = parts_lst;
-    char res[500];
-    char *part = res;
-    int count = 0, counter = 0, higher = 0;
-
-    for (; aux_parts; aux_parts = aux_parts->next)
-    {
-        count = 0;
-        printf("\n%s", aux_parts->part_num);
-        for (; aux_rel; aux_rel = aux_rel->next)
-        {
-
-            if (strcmp(aux_parts->part_num, aux_rel->part_num) == 0)
-                count++;
-        }
-        printf(" | %d", count);
-        if (count > higher)
-        {
-            printf("\nHigher: %d | %d", count, higher);
-            higher = count;
-            strcpy(res, aux_parts->part_num);
-        }
-    }
-    printf("\n%d", higher);
-    printf("\n%s", res);
-    return part;
-}
