@@ -3,8 +3,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <header.h>
 #include <string.h>
+#include <header.h>
+#include <parts.h>
+#include <relations.h>
+#include <sets.h>
 
 void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 {
@@ -58,11 +61,12 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             }
 
             search_sets = SearchSetbyTheme(sets_list, LowerString(theme));
+
             if (search_sets)
             {
                 OrderSetbyYear(search_sets);
 
-                printf("Name    Theme    Year");
+                printf("\nName    Theme    Year");
                 ListSetsNTY(search_sets);
             }
             else
@@ -176,7 +180,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 6:
             t = clock();
             printf("The most used part is: ");
-            printf("\n%s", majority(parts_list, relations_list, 0));
+            printf("\n%s", "here"); //MaxOccurPart(relations_list, parts_list, sets_list));
             t = clock() - t;
             time_taken = (((double)t) / CLOCKS_PER_SEC) / 60;
             printf("\n Took: %f minutes", time_taken);
@@ -196,9 +200,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             t = clock();
             search_sets = NULL;
             search_sets = SearchSetCanBuild(sets_list, relations_list, parts_list, search_sets);
-
-            //printf("here");
-            //ListSets(search_sets);
+            ListSets(search_sets);
             t = clock() - t;
             time_taken = (((double)t) / CLOCKS_PER_SEC) / 60;
             printf("\n Took: %f minutes", time_taken);
@@ -221,8 +223,8 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             fflush(stdin);
             printf("\nSet year: ");
             scanf("%d", &newSet->year);
-            sets_list = InsertSet(sets_list, newSet->set_num, newSet->name,
-                                  newSet->year, newSet->theme);
+            InsertSets(sets_list, newSet->set_num, newSet->name,
+                       newSet->year, newSet->theme);
             do
             {
                 fflush(stdin);
@@ -243,10 +245,10 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     printf("\nPart quantity: ");
                     scanf("%d", &quantity);
 
-                    parts_list = InsertPart(parts_list, part_num,
-                                            part_name, part_class, quantity);
-                    relations_list = InsertRelation(relations_list, newSet->set_num,
-                                                    quantity, part_num);
+                    InsertPart(parts_list, part_num,
+                               part_name, part_class, quantity);
+                    InsertRelation(relations_list, newSet->set_num,
+                                   quantity, part_num);
                 }
                 else
                 {
@@ -267,7 +269,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
                     search_parts = SearchPartsByNum(parts_list, part_num);
                     search_parts->stock = search_parts->stock + quantity;
-                    relations_list = InsertRelation(relations_list, newSet->set_num, quantity, part_num);
+                    InsertRelation(relations_list, newSet->set_num, quantity, part_num);
                 }
                 fflush(stdin);
                 printf("\nDo u wish to add more parts?[Y/N]");
@@ -346,15 +348,16 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
 void main()
 {
-    PARTS *parts_list = NULL;
-    SETS *sets_list = NULL;
-    RELATIONS *relations_list = NULL;
+    PARTS *parts_list = NewPartList();
+    SETS *sets_list = NewSetList();
+    RELATIONS *relations_list = NewRelationsList();
 
-    parts_list = OpenParts(parts_list);
-    sets_list = OpenSets(sets_list);
-    relations_list = OpenRelations(relations_list);
+    OpenParts(parts_list);
+    OpenSets(sets_list);
+    OpenRelations(relations_list);
 
     printf("\nDone!");
-    //ListRelations(relations_list);
+
+    //experimentar o valgrind;
     Menu(parts_list, sets_list, relations_list);
 }
