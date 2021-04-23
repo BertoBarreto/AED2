@@ -1,6 +1,7 @@
 #include <header.h>
 #include <stdio.h>
 #include <string.h>
+#include <parts.h>
 
 /**
  * @brief This function iterates through the parts list, printing part_num and name.
@@ -50,47 +51,5 @@ void ListPartsStock(PARTS *lst)
     for (; lst; lst = lst->next)
     {
         printf("\n%s - %s - %d", lst->part_num, lst->name, lst->stock);
-    }
-}
-
-/**
- * @brief This function iterates through the sets list, printing theme and year.
- * theme - year
- * 
- * @param lst ➔ Sets list to show
- */
-void ListSets(SETS *lst)
-{
-    for (; lst; lst = lst->next)
-    {
-        printf("%20s - %d\n", lst->theme, lst->year);
-    }
-}
-
-/**
- * @brief This function iterates through the sets list, printing name, theme, year.
- * name - theme - year
- * 
- * @param lst ➔ Sets list to show
- */
-void ListSetsNTY(SETS *lst)
-{
-    for (; lst; lst = lst->next)
-    {
-        printf("\n%s - %s - %d", lst->name, lst->theme, lst->year);
-    }
-}
-
-/**
- * @brief This function iterates through the Relations list, printing set_num and part_num.
- * set_num - part_num
- * 
- * @param lst ➔ Sets list to show
- */
-void ListRelations(RELATIONS *lst)
-{
-    for (; lst; lst = lst->next)
-    {
-        printf("%20s - %s\n", lst->set_num, lst->part_num);
     }
 }

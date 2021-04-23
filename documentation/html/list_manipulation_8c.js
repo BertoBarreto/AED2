@@ -4,7 +4,7 @@ var list_manipulation_8c =
     [ "DeleteSetsNode", "list_manipulation_8c.html#afef545119351ea3cdc0f0e3cd7a61c88", null ],
     [ "InsertPart", "list_manipulation_8c.html#a80c64d14bd6ec61dc18da8498fc48e3b", null ],
     [ "InsertRelation", "list_manipulation_8c.html#acbebda2c4b54d419dda8339e1cad453c", null ],
-    [ "InsertSet", "list_manipulation_8c.html#a852d9a39fa98f2f3e19a1631544d436a", null ],
+    [ "InsertSets", "list_manipulation_8c.html#a852d9a39fa98f2f3e19a1631544d436a", null ],
     [ "LowerString", "list_manipulation_8c.html#a1a5bf1d19187d4dd04ff85e086773f9c", null ],
     [ "MaxOccurPart", "list_manipulation_8c.html#aa46719f6c40576dbee49a439c12ced1b", null ],
     [ "OrderSetbyYear", "list_manipulation_8c.html#af4dee13401f9f13722e1b69b2b6a9c7c", null ],
