@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <header.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 SETS *Stock_changing(SETS *lst, char theme)
 {

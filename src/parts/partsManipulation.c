@@ -18,40 +18,24 @@
  */
 PARTS *InsertPart(PARTS *lst, const char *part_num, const char *name, const char *part_class, int stock)
 {
-    assert(lst);
-
     PARTS *new_part = malloc(sizeof(PARTS));
-    assert(new_part);
 
     strcpy(new_part->part_num, part_num);
     strcpy(new_part->name, name);
     strcpy(new_part->class, part_class);
     new_part->stock = stock;
-    new_part->next = lst;
 
-    new_part->next = NULL;
-    new_part->previous = lst;
-    if (new_part->previous)
-        new_part->previous->next = new_part;
+    if (lst)
+        new_part->next = lst;
+    else
+        new_part->next = NULL;
+
+    if (new_part->next)
+        new_part->next->previous = new_part;
+
+    new_part->previous = NULL;
+
     return new_part;
-}
-
-/**
- * @brief This function initializes the parts list, setting everything to null
- * 
- * @return PARTS* ➔ list
- */
-PARTS *NewPartList()
-{
-    PARTS *guard = malloc(sizeof(PARTS));
-    assert(guard);
-    guard->part_num[0] = '\0';
-    guard->name[0] = '\0';
-    guard->class[0] = '\0';
-    guard->stock = 0;
-
-    guard->previous = guard->next = guard;
-    return guard;
 }
 
 /**
@@ -61,15 +45,14 @@ PARTS *NewPartList()
  * @param counter ➔ The variable that sums the stock
  * @return int ➔ The sum of the stock
  */
-int StockParts(PARTS *lst, int counter)
+int StockParts(PARTS *lst)
 {
-    if (lst)
+    int counter = 0;
+    for (; lst; lst = lst->next)
     {
         counter += lst->stock;
-        StockParts(lst->next, counter);
     }
-    else
-        return counter;
+    return counter;
 }
 
 /**
@@ -79,22 +62,21 @@ int StockParts(PARTS *lst, int counter)
  * @param counter ➔ The variable that sums the quantity
  * @return int ➔ The sum of the quantities
  */
-int SetPartsQuantity(RELATIONS *lst, int counter)
+int SetPartsQuantity(RELATIONS *lst)
 {
-    if (lst)
+    int counter = 0;
+    for (; lst; lst = lst->next)
     {
         counter += lst->quantity;
-        SetPartsQuantity(lst->next, counter);
     }
-    else
-        return counter;
+    return counter;
 }
 
 /**
  * @brief This funtion deletes a node from a part list.
  * 
  * @param node ➔ node to delete
- * @return SETS* 
+ * @return PARTS* ➔ List without the deleted node
  */
 PARTS *DeletePartsNode(PARTS *node)
 {
@@ -112,7 +94,8 @@ PARTS *DeletePartsNode(PARTS *node)
  * 
  * @param lst ➔ The sets list
  * @param class ➔ The part class to delete
- * @return PARTS* 
+ * @return PARTS* ➔ New list without the parts removed
+ * @see LowerString
  */
 PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
 {
@@ -120,15 +103,15 @@ PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
     while (aux)
     {
         if (strcmp(LowerString(aux->class), class) == 0)
-        { // aux é o nodo a remover
+        {
 
-            if (aux->next) // não último nodo
+            if (aux->next)
                 aux->next->previous = aux->previous;
 
-            if (aux->previous) // não é o primeiro nodo!
+            if (aux->previous)
                 aux->previous->next = aux->next;
-            else                 // é o primeiro nodo
-                lst = aux->next; // apenas no caso de ser o 1º
+            else
+                lst = aux->next;
 
             aux = DeletePartsNode(aux);
         }

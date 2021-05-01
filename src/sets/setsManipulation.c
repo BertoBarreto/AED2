@@ -29,31 +29,17 @@ SETS *InsertSets(SETS *lst, char *set_num, char *name, int year, char *theme)
     strcpy(new_set->theme, theme);
     new_set->year = year;
 
-    new_set->next = NULL;
-    new_set->previous = lst;
+    if (lst)
+        new_set->next = lst;
+    else
+        new_set->next = NULL;
 
     if (new_set->next)
         new_set->next->previous = new_set;
-    if (new_set->previous)
-        new_set->previous->next = new_set;
-    return new_set;
-}
-/**
- * @brief This function initializes the sets list, setting everything to null
- * 
- * @return SETS* ➔ list
- */
-SETS *NewSetList()
-{
-    SETS *guard = malloc(sizeof(SETS));
-    assert(guard);
-    guard->set_num[0] = '\0';
-    guard->name[0] = '\0';
-    guard->theme[0] = '\0';
-    guard->year = '\0';
 
-    guard->previous = guard->next = guard;
-    return guard;
+    new_set->previous = NULL;
+    lst = new_set;
+    return lst;
 }
 
 /**   
@@ -127,7 +113,7 @@ void swap(SETS *a, SETS *b)
  * @brief This funtion deletes a node from a sets list.
  * 
  * @param node ➔ node to delete
- * @return SETS* 
+ * @return SETS* ➔ list without the deleted node
  */
 SETS *DeleteSetsNode(SETS *node)
 {
@@ -146,7 +132,9 @@ SETS *DeleteSetsNode(SETS *node)
  * 
  * @param lst ➔ The sets list
  * @param theme ➔ The set theme to delete
- * @return SETS* 
+ * @return SETS* ➔ List with sets removed
+ * @see LowerString
+ * @see DeleteSetsNode
  */
 SETS *RemoveSetsbyTheme(SETS *lst, const char *theme)
 {

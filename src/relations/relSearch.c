@@ -5,21 +5,25 @@
 #include <string.h>
 #include <relations.h>
 #include <parts.h>
+
 /**
  * @brief This function searches for all the relations with a set_num.
  * 
  * @param rel ➔ Relations list
  * @param set_num ➔ The set_num to search for
  * @return RELATIONS* ➔ List of relations found
+ * @see InsertRelation
  */
 RELATIONS *SearchRelations(RELATIONS *rel, char *set_num)
 {
-    RELATIONS *search = NewRelationsList();
+    RELATIONS *search = NULL;
 
     for (; rel; rel = rel->next)
     {
         if (strcmp(set_num, rel->set_num) == 0)
-            InsertRelation(search, rel->set_num, rel->quantity, rel->part_num);
+        {
+            search = InsertRelation(search, rel->set_num, rel->quantity, rel->part_num);
+        }
     }
     return search;
 }
@@ -30,6 +34,7 @@ RELATIONS *SearchRelations(RELATIONS *rel, char *set_num)
  * @param rel ➔ Relations list
  * @param set_num ➔ The set_num to search for
  * @return RELATIONS* ➔ List of relations found
+ * @see InsertRelation
  */
 RELATIONS *SearchPartsRelations(RELATIONS *rel, char *part_num)
 {
@@ -44,43 +49,93 @@ RELATIONS *SearchPartsRelations(RELATIONS *rel, char *part_num)
 }
 
 /**
- * @brief This function will check if there is enough stock to build the set
- * @brief This function will iterate through a set relations list, and firstly will get the part that the it is checking, 
- * then if that part exists it will check if the quantity needed if higher than the stock of that part
- * if it is, it means that the set cant be built so is better so check if cant be build than if can be 
- * built because it will not check all the parts if one fails saving some time
- * 
- * @param rel_lst ➔ Set Relations list
- * @param parts_lst ➔ Parts list
- * @return true ➔ If the set can be built
- * @return false ➔ If the set cant be built
+ * @brief List of parts to be counted 
  */
-bool SearchCanBuildRelations(RELATIONS *rel_lst, PARTS *parts_lst, char *set_num, bool gotNext)
+typedef struct _part_counter
 {
+    char part_num[500];
+    int counter;
+    struct _part_counter *next;
+} PARTCOUNTER;
 
-    PARTS *parts_search = NewPartList();
-    if (rel_lst)
+/**
+ * @brief This function allows to inset a part into the PARTCOUNTER list, it checks if the list has values in the actual positon, if not then 
+ * it will add the new part with counter to 1, else if the part that is in the actual position is the same that we are trying to insert then
+ * the counter of that part will be increased, if none of those conditions verifies then it will check the next position
+ * 
+ * @param lst ➔ PARTCOUNTER list
+ * @param part_num ➔ Part to count
+ * @return PARTCOUNTER* ➔ List with the new counter
+ */
+PARTCOUNTER *InsertCounterSearch(PARTCOUNTER *lst, char *part_num)
+{
+    if (!lst)
     {
-        parts_search = SearchPartsByNum(parts_lst, rel_lst->part_num);
-        if (parts_search)
-        {
-            if (rel_lst->next && strcmp(set_num, rel_lst->next->set_num) == 0)
-            {
-                gotNext = true;
-                if (rel_lst->next->quantity > parts_search->stock)
-                    return false;
-            }
-            if (rel_lst->quantity > parts_search->stock)
-                return false;
-        }
-
-        if (gotNext == true)
-            rel_lst = rel_lst->next->next;
-        else
-            rel_lst = rel_lst->next;
-
-        return SearchCanBuildRelations(rel_lst, parts_lst, set_num, false);
+        PARTCOUNTER *counter = malloc(sizeof(PARTCOUNTER));
+        strcpy(counter->part_num, part_num);
+        counter->counter = 1;
+        counter->next = lst;
+        lst = counter;
+    }
+    else if (strcmp(part_num, lst->part_num) == 0)
+    {
+        lst->counter++;
     }
     else
-        return true;
+    {
+        lst->next = InsertCounterSearch(lst->next, part_num);
+    }
+}
+
+/**
+ * @brief This function finds the part that has the higher counter in the list PARTCOUNTER iterating through the list 
+ * and storing the values that are higher than the actual higher counter.
+ * 
+ * @param lst ➔ List PARTCOUNTER
+ * @return char* ➔ More used part
+ */
+char *MoreUsed(PARTCOUNTER *lst)
+{
+    if (!lst)
+        return NULL;
+
+    PARTCOUNTER *max = malloc(sizeof(PARTCOUNTER));
+    strcpy(max->part_num, lst->part_num);
+    max->counter = lst->counter;
+
+    while (lst->next)
+    {
+        lst = lst->next;
+        if (lst->counter > max->counter)
+        {
+            strcpy(max->part_num, lst->part_num);
+            max->counter = lst->counter;
+        }
+    }
+
+    char *winner = max->part_num;
+    free(max);
+    return winner;
+}
+
+/**
+ * @brief This function Iterates though the realations list calling the insert counter function so that it counts the parts in the realations list
+ * the it calls the MoreUsed function storing the part_num that it returns in a string and returning it 
+ * 
+ * @param lst ➔ Realations list
+ * @return char* ➔ More used part in the realations list
+ * @see InsertCounterSearch
+ * @see MoreUsed
+ */
+char *MoreUsedPart(RELATIONS *lst)
+{
+    PARTCOUNTER *counter = NULL;
+
+    for (; lst; lst = lst->next)
+    {
+        counter = InsertCounterSearch(counter, lst->part_num);
+    }
+
+    char *part = MoreUsed(counter);
+    return strdup(part);
 }

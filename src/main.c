@@ -12,11 +12,11 @@
 void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 {
     int option, quantity, year;
-    SETS *newSet;
-    PARTS *part_Set;
-    RELATIONS *newRel;
+    SETS *newSet = NULL;
+    PARTS *part_Set = NULL;
+    RELATIONS *newRel = NULL;
     char part_num[100], part_class[100], part_name[100],
-        set_num[100], theme[100], decision;
+        set_name[100], set_num[100], theme[100], decision;
 
     PARTS *search_parts = NULL;
     SETS *search_sets = NULL;
@@ -35,7 +35,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         printf("\n** 3-See all the parts in a set                 **");
         printf("\n** 4-Total parts in stock                       **");
         printf("\n** 5-Total parts in a set                       **");
-        printf("\n** 6-Wich part is more used in diferent sets(TODO)**");
+        printf("\n** 6-Wich part is more used in diferent sets    **");
         printf("\n** 7-Sets that can be built with the stock      **");
         printf("\n** 8-Edit parts number in stock (TODO)          **");
         printf("\n** 9-Add set and set parts to stock             **");
@@ -145,7 +145,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 #pragma endregion
 
         case 4:
-            printf("\nParts in stock: %d parts", StockParts(parts_list, 0));
+            printf("\nParts in stock: %d parts", StockParts(parts_list));
             break;
 
 #pragma region Total_Parts_Needed_In_Set
@@ -165,7 +165,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
             if (search_relations)
             {
-                printf("\nTotal parts needed: %d parts", SetPartsQuantity(search_relations, 0));
+                printf("\nTotal parts needed: %d parts", SetPartsQuantity(search_relations));
             }
             else
             {
@@ -180,17 +180,10 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 6:
             t = clock();
             printf("The most used part is: ");
-            printf("\n%s", "here"); //MaxOccurPart(relations_list, parts_list, sets_list));
+            printf("\n%s", MoreUsedPart(relations_list));
             t = clock() - t;
-            time_taken = (((double)t) / CLOCKS_PER_SEC) / 60;
-            printf("\n Took: %f minutes", time_taken);
-            //majority(relations_list, 0);
-            /*search_parts = SearchPartsByNum(parts_list, MaxOccurPart(relations_list));
-            printf("\n%s", search_parts->part_num);
-            printf("\n Part Num: %s", search_parts->part_num);
-            printf("\n Part Name: %s", search_parts->name);
-            printf("\n Part Class: %s", search_parts->class);
-            printf("\n Part Stock: %d", search_parts->stock);*/
+            time_taken = ((double)t) / CLOCKS_PER_SEC;
+            printf("\n Took: %f seconds", time_taken);
 
             break;
 #pragma endregion
@@ -198,12 +191,17 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 #pragma region Sets_Can_Be_Built
         case 7:
             t = clock();
-            search_sets = NULL;
-            search_sets = SearchSetCanBuild(sets_list, relations_list, parts_list, search_sets);
+            search_sets = SearchSetCanBuild(sets_list, relations_list, parts_list);
             ListSets(search_sets);
             t = clock() - t;
             time_taken = (((double)t) / CLOCKS_PER_SEC) / 60;
             printf("\n Took: %f minutes", time_taken);
+
+            break;
+#pragma endregion
+
+#pragma region Sets_Can_Be_Built
+        case 8:
 
             break;
 #pragma endregion
@@ -213,18 +211,18 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
             fflush(stdin);
             printf("\nSet num: ");
-            scanf("%[^\n]", newSet->set_num);
+            scanf("%[^\n]", set_num);
             fflush(stdin);
             printf("\nSet name: ");
-            scanf("%[^\n]", newSet->name);
+            scanf("%[^\n]", set_name);
             fflush(stdin);
             printf("\nSet theme: ");
-            scanf("%[^\n]", newSet->theme);
+            scanf("%[^\n]", theme);
             fflush(stdin);
             printf("\nSet year: ");
-            scanf("%d", &newSet->year);
-            InsertSets(sets_list, newSet->set_num, newSet->name,
-                       newSet->year, newSet->theme);
+            scanf("%d", &year);
+            sets_list = InsertSets(sets_list, set_num, set_name,
+                                   year, theme);
             do
             {
                 fflush(stdin);
@@ -245,10 +243,10 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     printf("\nPart quantity: ");
                     scanf("%d", &quantity);
 
-                    InsertPart(parts_list, part_num,
-                               part_name, part_class, quantity);
-                    InsertRelation(relations_list, newSet->set_num,
-                                   quantity, part_num);
+                    parts_list = InsertPart(parts_list, part_num,
+                                            part_name, part_class, quantity);
+                    relations_list = InsertRelation(relations_list, set_num,
+                                                    quantity, part_num);
                 }
                 else
                 {
@@ -268,16 +266,20 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     scanf("%d", &quantity);
 
                     search_parts = SearchPartsByNum(parts_list, part_num);
-                    search_parts->stock = search_parts->stock + quantity;
-                    InsertRelation(relations_list, newSet->set_num, quantity, part_num);
+
+                    search_parts->stock += quantity;
+
+                    relations_list = InsertRelation(relations_list, set_num, quantity, part_num);
                 }
                 fflush(stdin);
                 printf("\nDo u wish to add more parts?[Y/N]");
                 scanf("%c", &decision);
             } while (tolower(decision) == 'y');
-
-            search_relations = SearchRelations(relations_list, newSet->set_num);
+            printf("\n here");
+            search_relations = SearchRelations(relations_list, set_num);
+            printf("\n here");
             ListRelations(search_relations);
+            printf("\n here");
             break;
 #pragma endregion
 
@@ -348,14 +350,13 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
 void main()
 {
-    PARTS *parts_list = NewPartList();
-    SETS *sets_list = NewSetList();
-    RELATIONS *relations_list = NewRelationsList();
+    PARTS *parts_list = NULL;
+    SETS *sets_list = NULL;
+    RELATIONS *relations_list = NULL;
 
-    OpenParts(parts_list);
-    OpenSets(sets_list);
-    OpenRelations(relations_list);
-
+    parts_list = OpenParts(parts_list);
+    sets_list = OpenSets(sets_list);
+    relations_list = OpenRelations(relations_list);
     printf("\nDone!");
 
     //experimentar o valgrind;

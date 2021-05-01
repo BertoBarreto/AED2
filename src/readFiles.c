@@ -9,10 +9,10 @@
  * the file reading line by line and storing each line values in a list that is then returned
  * 
  * @param parts ➔ The parts list
- * @see InsertPart
  * @return PARTS* ➔ list with all the parts from the parts file
+ * @see InsertPart
  */
-void OpenParts(PARTS *parts)
+PARTS *OpenParts(PARTS *parts)
 {
     FILE *fp;
     char part_num[100];
@@ -31,6 +31,7 @@ void OpenParts(PARTS *parts)
         }
     }
     fclose(fp);
+    return parts;
 }
 
 /**
@@ -39,10 +40,10 @@ void OpenParts(PARTS *parts)
  * the file reading line by line and storing each line values in a list that is then returned
  * 
  * @param sets ➔ The sets list
- * @see InsertSets
  * @return SETS* ➔ list with all the sets from the sets file
+ * @see InsertSets
  */
-void OpenSets(SETS *sets)
+SETS *OpenSets(SETS *sets)
 {
     FILE *fp;
     char set_num[100];
@@ -61,6 +62,7 @@ void OpenSets(SETS *sets)
         }
     }
     fclose(fp);
+    return sets;
 }
 
 /**
@@ -69,10 +71,10 @@ void OpenSets(SETS *sets)
  * the file reading line by line and storing each line values in a list that is then returned
  * 
  * @param relations ➔ The relations list
- * @see InsertRelation
  * @return RELATIONS* ➔ List with all the relations from the parts_sets file
+ * @see InsertRelation
  */
-void OpenRelations(RELATIONS *relations)
+RELATIONS *OpenRelations(RELATIONS *relations)
 {
     FILE *fp;
     char set_num[100];
@@ -91,4 +93,5 @@ void OpenRelations(RELATIONS *relations)
         }
     }
     fclose(fp);
+    return relations;
 }

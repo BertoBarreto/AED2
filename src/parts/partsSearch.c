@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <parts.h>
+#include <relations.h>
 
 /**
  * @brief This function searches parts by part_num and class
@@ -12,22 +13,19 @@
  * @param part_num ➔ part_num to search
  * @param class ➔ class to search
  * @return PARTS* ➔ Part found
+ * @see LowerString
  */
 PARTS *SearchPartsByNumClass(PARTS *parts, char *part_num, char *class)
 {
-    if (!parts)
-        return NULL;
-    else if (strcmp(part_num, parts->part_num) == 0)
+    for (; parts; parts = parts->next)
     {
-        if (strcmp(class, LowerString(parts->class)) == 0)
-            return parts;
-        else
-            return NULL;
+        if (strcmp(part_num, parts->part_num) == 0)
+        {
+            if (strcmp(class, LowerString(parts->class)) == 0)
+                return parts;
+        }
     }
-    else
-    {
-        return SearchPartsByNumClass(parts->next, part_num, class);
-    }
+    return NULL;
 }
 
 /**
@@ -38,6 +36,8 @@ PARTS *SearchPartsByNumClass(PARTS *parts, char *part_num, char *class)
  * @param parts ➔ Parts list
  * @param rel ➔ Relations list
  * @return PARTS* ➔ List with all the parts found
+ * @see SearchPartsByNumClass
+ * @see InsertPart
  */
 PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
 {
@@ -47,7 +47,7 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
     {
         partSearch = SearchPartsByNumClass(parts, rel->part_num, class);
         if (partSearch)
-            InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
+            search = InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
     }
 
     return search;
@@ -61,16 +61,18 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
  * @param parts ➔ Parts list
  * @param rel ➔ Relations list
  * @return PARTS* ➔ List with all the parts found
+ * @see SearchPartsByNum
+ * @see InsertPart
  */
 PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
 {
-    PARTS *search = NewPartList();
-    PARTS *partSearch = NewPartList();
+    PARTS *search = NULL;
+    PARTS *partSearch = NULL;
     for (; rel; rel = rel->next)
     {
         partSearch = SearchPartsByNum(parts, rel->part_num);
         if (partSearch)
-            InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
+            search = InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
     }
 
     return search;
@@ -122,7 +124,8 @@ PARTS *SearchPartsByClass(PARTS *parts, char *class)
  * @param lst ➔ Parts list
  * @param part_num ➔ part_num to check
  * @return true ➔ If finds the part
- * @return false ➔ If doesnt find the part 
+ * @return false ➔ If doesnt find the part
+ * @see LowerString 
  */
 bool ExistsPart(PARTS *lst, char *part_num)
 {
@@ -140,6 +143,7 @@ bool ExistsPart(PARTS *lst, char *part_num)
  * @param lst ➔ Parts list
  * @return true ➔ If finds a part
  * @return false ➔ If doesnt find a part
+ * @see LowerString
  */
 bool ExistsClass(PARTS *lst, char *class)
 {
