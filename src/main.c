@@ -12,9 +12,7 @@
 void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 {
     int option, quantity, year;
-    SETS *newSet = NULL;
     PARTS *part_Set = NULL;
-    RELATIONS *newRel = NULL;
     char part_num[100], part_class[100], part_name[100],
         set_name[100], set_num[100], theme[100], decision;
 
@@ -178,24 +176,18 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
 #pragma region Most_Used_Part
         case 6:
-            t = clock();
+
             printf("The most used part is: ");
             printf("\n%s", MoreUsedPart(relations_list));
-            t = clock() - t;
-            time_taken = ((double)t) / CLOCKS_PER_SEC;
-            printf("\n Took: %f seconds", time_taken);
 
             break;
 #pragma endregion
 
 #pragma region Sets_Can_Be_Built
         case 7:
-            t = clock();
+
             search_sets = SearchSetCanBuild(sets_list, relations_list, parts_list);
             ListSets(search_sets);
-            t = clock() - t;
-            time_taken = (((double)t) / CLOCKS_PER_SEC) / 60;
-            printf("\n Took: %f minutes", time_taken);
 
             break;
 #pragma endregion
