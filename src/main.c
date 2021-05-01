@@ -275,11 +275,11 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 printf("\nDo u wish to add more parts?[Y/N]");
                 scanf("%c", &decision);
             } while (tolower(decision) == 'y');
-
-            search_relations = SearchRelations(relations_list, newSet->set_num);
-
+            printf("\n here");
+            search_relations = SearchRelations(relations_list, set_num);
+            printf("\n here");
             ListRelations(search_relations);
-
+            printf("\n here");
             break;
 #pragma endregion
 

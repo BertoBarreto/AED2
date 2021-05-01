@@ -9,8 +9,8 @@
  * the file reading line by line and storing each line values in a list that is then returned
  * 
  * @param parts ➔ The parts list
- * @see InsertPart
  * @return PARTS* ➔ list with all the parts from the parts file
+ * @see InsertPart
  */
 PARTS *OpenParts(PARTS *parts)
 {
@@ -40,8 +40,8 @@ PARTS *OpenParts(PARTS *parts)
  * the file reading line by line and storing each line values in a list that is then returned
  * 
  * @param sets ➔ The sets list
- * @see InsertSets
  * @return SETS* ➔ list with all the sets from the sets file
+ * @see InsertSets
  */
 SETS *OpenSets(SETS *sets)
 {
@@ -71,8 +71,8 @@ SETS *OpenSets(SETS *sets)
  * the file reading line by line and storing each line values in a list that is then returned
  * 
  * @param relations ➔ The relations list
- * @see InsertRelation
  * @return RELATIONS* ➔ List with all the relations from the parts_sets file
+ * @see InsertRelation
  */
 RELATIONS *OpenRelations(RELATIONS *relations)
 {

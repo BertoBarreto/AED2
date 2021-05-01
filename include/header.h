@@ -14,6 +14,5 @@ RELATIONS *OpenRelations(RELATIONS *relations);
  * Insert Data in lists *
  ************************/
 char *LowerString(char *string);
-char *MoreUsedPart(RELATIONS *lst);
 
 #endif

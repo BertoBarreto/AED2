@@ -64,6 +64,9 @@ SETS *SearchSetbyTheme(SETS *lst, char *theme)
  * @param rel_lst ➔ The relations list
  * @param parts_lst ➔ The parts list
  * @return SETS* ➔ List of all the sets that can be built
+ * @see SetsSearchByNum
+ * @see InsertSets
+ * @see SearchPartsByNum
  */
 SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst)
 {
@@ -112,6 +115,7 @@ SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst)
  * @param set_num ➔ set_num to check
  * @return true ➔ If finds a set
  * @return false ➔ If doesnt find a set
+ * @see LowerString
  */
 bool ExistsSet(SETS *lst, char *set_num)
 {
@@ -130,6 +134,7 @@ bool ExistsSet(SETS *lst, char *set_num)
  * @param theme ➔ theme to check
  * @return true ➔ If finds a set
  * @return false ➔ If doesnt find a set 
+ * @see LowerString
  */
 bool ExistsTheme(SETS *lst, char *theme)
 {

@@ -39,24 +39,6 @@ PARTS *InsertPart(PARTS *lst, const char *part_num, const char *name, const char
 }
 
 /**
- * @brief This function initializes the parts list, setting everything to null
- * 
- * @return PARTS* ➔ list
- */
-PARTS *NewPartList()
-{
-    PARTS *guard = malloc(sizeof(PARTS));
-    assert(guard);
-    guard->part_num[0] = '\0';
-    guard->name[0] = '\0';
-    guard->class[0] = '\0';
-    guard->stock = 0;
-
-    guard->previous = guard->next = guard;
-    return guard;
-}
-
-/**
  * @brief This function iterates through the parts list and sums the stock to the counter variable.
  * 
  * @param lst ➔ The parts list
@@ -94,7 +76,7 @@ int SetPartsQuantity(RELATIONS *lst)
  * @brief This funtion deletes a node from a part list.
  * 
  * @param node ➔ node to delete
- * @return SETS* 
+ * @return PARTS* ➔ List without the deleted node
  */
 PARTS *DeletePartsNode(PARTS *node)
 {
@@ -112,7 +94,8 @@ PARTS *DeletePartsNode(PARTS *node)
  * 
  * @param lst ➔ The sets list
  * @param class ➔ The part class to delete
- * @return PARTS* 
+ * @return PARTS* ➔ New list without the parts removed
+ * @see LowerString
  */
 PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
 {
@@ -120,15 +103,15 @@ PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
     while (aux)
     {
         if (strcmp(LowerString(aux->class), class) == 0)
-        { // aux é o nodo a remover
+        {
 
-            if (aux->next) // não último nodo
+            if (aux->next)
                 aux->next->previous = aux->previous;
 
-            if (aux->previous) // não é o primeiro nodo!
+            if (aux->previous)
                 aux->previous->next = aux->next;
-            else                 // é o primeiro nodo
-                lst = aux->next; // apenas no caso de ser o 1º
+            else
+                lst = aux->next;
 
             aux = DeletePartsNode(aux);
         }

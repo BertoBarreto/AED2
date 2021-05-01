@@ -38,20 +38,3 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
     new_relation->previous = NULL;
     return new_relation;
 }
-
-/**
- * @brief This function initializes the relations list, setting everything to null
- * 
- * @return RELATIONS* ➔ list
- */
-RELATIONS *NewRelationsList()
-{
-    RELATIONS *guard = malloc(sizeof(RELATIONS));
-    assert(guard);
-    guard->set_num[0] = '\0';
-    guard->part_num[0] = '\0';
-    guard->quantity = '\0';
-
-    guard->previous = guard->next = guard;
-    return guard;
-}

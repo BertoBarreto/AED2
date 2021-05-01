@@ -41,23 +41,6 @@ SETS *InsertSets(SETS *lst, char *set_num, char *name, int year, char *theme)
     lst = new_set;
     return lst;
 }
-/**
- * @brief This function initializes the sets list, setting everything to null
- * 
- * @return SETS* ➔ list
- */
-SETS *NewSetList()
-{
-    SETS *guard = malloc(sizeof(SETS));
-    assert(guard);
-    guard->set_num[0] = '\0';
-    guard->name[0] = '\0';
-    guard->theme[0] = '\0';
-    guard->year = '\0';
-
-    guard->previous = guard->next = guard;
-    return guard;
-}
 
 /**   
  * @brief This function allows to Order a set by its year acendant.
@@ -130,7 +113,7 @@ void swap(SETS *a, SETS *b)
  * @brief This funtion deletes a node from a sets list.
  * 
  * @param node ➔ node to delete
- * @return SETS* 
+ * @return SETS* ➔ list without the deleted node
  */
 SETS *DeleteSetsNode(SETS *node)
 {
@@ -149,7 +132,9 @@ SETS *DeleteSetsNode(SETS *node)
  * 
  * @param lst ➔ The sets list
  * @param theme ➔ The set theme to delete
- * @return SETS* 
+ * @return SETS* ➔ List with sets removed
+ * @see LowerString
+ * @see DeleteSetsNode
  */
 SETS *RemoveSetsbyTheme(SETS *lst, const char *theme)
 {

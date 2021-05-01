@@ -13,6 +13,7 @@
  * @param part_num ➔ part_num to search
  * @param class ➔ class to search
  * @return PARTS* ➔ Part found
+ * @see LowerString
  */
 PARTS *SearchPartsByNumClass(PARTS *parts, char *part_num, char *class)
 {
@@ -35,6 +36,8 @@ PARTS *SearchPartsByNumClass(PARTS *parts, char *part_num, char *class)
  * @param parts ➔ Parts list
  * @param rel ➔ Relations list
  * @return PARTS* ➔ List with all the parts found
+ * @see SearchPartsByNumClass
+ * @see InsertPart
  */
 PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
 {
@@ -58,6 +61,8 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
  * @param parts ➔ Parts list
  * @param rel ➔ Relations list
  * @return PARTS* ➔ List with all the parts found
+ * @see SearchPartsByNum
+ * @see InsertPart
  */
 PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
 {
@@ -119,7 +124,8 @@ PARTS *SearchPartsByClass(PARTS *parts, char *class)
  * @param lst ➔ Parts list
  * @param part_num ➔ part_num to check
  * @return true ➔ If finds the part
- * @return false ➔ If doesnt find the part 
+ * @return false ➔ If doesnt find the part
+ * @see LowerString 
  */
 bool ExistsPart(PARTS *lst, char *part_num)
 {
@@ -137,6 +143,7 @@ bool ExistsPart(PARTS *lst, char *part_num)
  * @param lst ➔ Parts list
  * @return true ➔ If finds a part
  * @return false ➔ If doesnt find a part
+ * @see LowerString
  */
 bool ExistsClass(PARTS *lst, char *class)
 {
