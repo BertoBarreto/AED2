@@ -5,6 +5,7 @@
 #include <string.h>
 #include <relations.h>
 #include <parts.h>
+
 /**
  * @brief This function searches for all the relations with a set_num.
  * 
@@ -14,12 +15,14 @@
  */
 RELATIONS *SearchRelations(RELATIONS *rel, char *set_num)
 {
-    RELATIONS *search = NewRelationsList();
+    RELATIONS *search = NULL;
 
     for (; rel; rel = rel->next)
     {
         if (strcmp(set_num, rel->set_num) == 0)
-            InsertRelation(search, rel->set_num, rel->quantity, rel->part_num);
+        {
+            search = InsertRelation(search, rel->set_num, rel->quantity, rel->part_num);
+        }
     }
     return search;
 }
@@ -59,28 +62,14 @@ bool SearchCanBuildRelations(RELATIONS *rel_lst, PARTS *parts_lst, char *set_num
 {
 
     PARTS *parts_search = NewPartList();
-    if (rel_lst)
+    for (; rel_lst; rel_lst = rel_lst->next)
     {
         parts_search = SearchPartsByNum(parts_lst, rel_lst->part_num);
         if (parts_search)
         {
-            if (rel_lst->next && strcmp(set_num, rel_lst->next->set_num) == 0)
-            {
-                gotNext = true;
-                if (rel_lst->next->quantity > parts_search->stock)
-                    return false;
-            }
             if (rel_lst->quantity > parts_search->stock)
                 return false;
         }
-
-        if (gotNext == true)
-            rel_lst = rel_lst->next->next;
-        else
-            rel_lst = rel_lst->next;
-
-        return SearchCanBuildRelations(rel_lst, parts_lst, set_num, false);
     }
-    else
-        return true;
+    return true;
 }

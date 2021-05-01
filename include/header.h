@@ -6,13 +6,14 @@
 /*******************************************
  * Read Files and save their data in lists *
  *******************************************/
-void OpenParts(PARTS *parts);
-void OpenSets(SETS *sets);
-void OpenRelations(RELATIONS *relations);
+PARTS *OpenParts(PARTS *parts);
+SETS *OpenSets(SETS *sets);
+RELATIONS *OpenRelations(RELATIONS *relations);
 
 /************************
  * Insert Data in lists *
  ************************/
 char *LowerString(char *string);
+char *MoreUsedPart(RELATIONS *lst);
 
 #endif

@@ -11,49 +11,42 @@ typedef struct _part_counter
     struct _part_counter *next;
 } PARTCOUNTER;
 
-PARTCOUNTER *NewCounter(PARTCOUNTER *lst, char *part_num)
-{
-    PARTCOUNTER *counter = malloc(sizeof(PARTCOUNTER));
-    strcpy(counter->part_num, part_num);
-    counter->counter = 1;
-    counter->next = NULL;
-}
-
-PARTCOUNTER *count_part(PARTCOUNTER *lst, char *part_num)
+PARTCOUNTER *InsertCounterSearch(PARTCOUNTER *lst, char *part_num)
 {
     if (!lst)
     {
-        lst = NewCounter(lst, part_num);
+        PARTCOUNTER *counter = malloc(sizeof(PARTCOUNTER));
+        strcpy(counter->part_num, part_num);
+        counter->counter = 1;
+        counter->next = lst;
+        lst = counter;
+    }
+    else if (strcmp(part_num, lst->part_num) == 0)
+    {
+        lst->counter++;
     }
     else
     {
-        while (lst)
-        {
-            if (strcmp(part_num, lst->part_num) == 0)
-            {
-                lst->counter++;
-            }
-        }
+        lst->next = InsertCounterSearch(lst->next, part_num);
     }
-    return lst;
 }
 
-char *more_used(PARTCOUNTER *lst)
+char *MoreUsed(PARTCOUNTER *lst)
 {
     if (!lst)
         return NULL;
 
     PARTCOUNTER *max = malloc(sizeof(PARTCOUNTER));
-    max->counter = lst->counter;
     strcpy(max->part_num, lst->part_num);
+    max->counter = lst->counter;
 
     while (lst->next)
     {
-        lst = lst->next; // <=== incremento
+        lst = lst->next;
         if (lst->counter > max->counter)
         {
-            max->counter = lst->counter;
             strcpy(max->part_num, lst->part_num);
+            max->counter = lst->counter;
         }
     }
 
@@ -61,23 +54,16 @@ char *more_used(PARTCOUNTER *lst)
     free(max);
     return winner;
 }
-PARTS *MaxOccurPart(RELATIONS *guard)
-{
-    PARTCOUNTER *counter = NULL;
-}
 
-char *marca_mais_usada(RELATIONS *guard)
+char *MoreUsedPart(RELATIONS *lst)
 {
     PARTCOUNTER *counter = NULL;
 
-    RELATIONS *rel = guard->next;
-    while (rel != guard)
+    for (; lst; lst = lst->next)
     {
-        counter = count_part(counter, rel->part_num);
-        rel = rel->next;
+        counter = InsertCounterSearch(counter, lst->part_num);
     }
 
-    char *part = more_used(counter);
-    //libertar_marcas(counter);
+    char *part = MoreUsed(counter);
     return strdup(part);
 }

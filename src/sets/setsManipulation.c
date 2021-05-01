@@ -29,14 +29,17 @@ SETS *InsertSets(SETS *lst, char *set_num, char *name, int year, char *theme)
     strcpy(new_set->theme, theme);
     new_set->year = year;
 
-    new_set->next = NULL;
-    new_set->previous = lst;
+    if (lst)
+        new_set->next = lst;
+    else
+        new_set->next = NULL;
 
     if (new_set->next)
         new_set->next->previous = new_set;
-    if (new_set->previous)
-        new_set->previous->next = new_set;
-    return new_set;
+
+    new_set->previous = NULL;
+    lst = new_set;
+    return lst;
 }
 /**
  * @brief This function initializes the sets list, setting everything to null

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sets.h>
-#include <relations.h>
+#include <parts.h>
 
 /**
  * @brief This function searches for a set by its set_num.
@@ -27,22 +27,6 @@ SETS *SetsSearchByNum(SETS *sets, char *set_num)
         return NULL;
 }
 
-SETS *InsertSetsearch(SETS *lst, char *set_num, char *theme, char *name, int year)
-{
-    SETS *search = malloc(sizeof(SETS));
-
-    strcpy(search->set_num, set_num);
-    strcpy(search->theme, theme);
-    strcpy(search->name, name);
-    search->year = year;
-
-    search->next = lst;
-    search->previous = NULL;
-    lst = search;
-
-    return lst;
-}
-
 /**
  * @brief This function searches for a set by its theme.
  * 
@@ -61,7 +45,7 @@ SETS *SearchSetbyTheme(SETS *lst, char *theme)
         if (strcmp(theme, LowerString(lst->theme)) == 0)
         {
 
-            search = InsertSetsearch(search, lst->set_num, lst->theme, lst->name, lst->year);
+            search = InsertSets(search, lst->set_num, lst->name, lst->year, lst->theme);
             counter++;
         }
     }
@@ -70,41 +54,55 @@ SETS *SearchSetbyTheme(SETS *lst, char *theme)
 }
 
 /**
- * @brief This function searches for the sets that can be built with the parts stock.
- * @brief This function firstly will iterate through the sets and get the corresponding relations from a search relation function, then it will check for each relation
- * wich part it is and if the part stock is enough to build the set, then if it is enough it will add that set to the search list and by the end return that list
- * 
- * @param sets_lst ➔ The list of all the sets
- * @param rel_lst ➔ The list of all the relations
- * @param parts_lst ➔ The list of all the parts
- * @param search ➔ The search variable that will receive all the sets that can be built
+ * @brief This function allows to search for sets that can be built
+ * @brief This function iterates through the relations list, verifing if the set_num of the actual
+ *  position in the list is diferent from the previous because if it is it means that we are in another set so 
+ * we need to check if the boolean canBuild is true, if it is then the set will be added to the list of sets that can be built.
+ * if the condition isnt verified then the part of the actual position will bve searched and check if the stock of that part is lower then the needed quantity
+ * and if that verifies then the bool canBuild will be setted to false so that when we change set the set that cant be built isnt added to the sets that can be built list
+ * @param sets_lst ➔ The sets list
+ * @param rel_lst ➔ The relations list
+ * @param parts_lst ➔ The parts list
  * @return SETS* ➔ List of all the sets that can be built
- * @see SearchCanBuildRelations
- * @see SearchRelations
- * @see InsertSets
  */
-SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst, SETS *search)
+SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst)
 {
-    SETS *search_set = NewSetList();
-    RELATIONS *search_rel = NewRelationsList();
-    if (sets_lst)
-    {
-        search_rel = SearchRelations(rel_lst, sets_lst->set_num);
-        if (search_rel)
-        {
-            if (SearchCanBuildRelations(search_rel, parts_lst, sets_lst->set_num, false) == true)
-            {
+    SETS *search, *set = NULL;
+    PARTS *part = NULL;
+    bool canBuild = true;
 
-                InsertSets(search, sets_lst->set_num, sets_lst->name, sets_lst->year, sets_lst->theme);
+    for (; rel_lst; rel_lst = rel_lst->next)
+    {
+        if (rel_lst->previous)
+        {
+            if (strcmp(rel_lst->previous->set_num, rel_lst->set_num) != 0)
+            {
+                if (canBuild == true)
+                {
+                    set = SetsSearchByNum(sets_lst, rel_lst->previous->set_num);
+
+                    if (set)
+                        search = InsertSets(search, set->set_num, set->name, set->year, set->theme);
+                }
+                canBuild = true;
             }
         }
+        if (canBuild == true)
+        {
+            part = SearchPartsByNum(parts_lst, rel_lst->part_num);
+            if (part)
+            {
+                if (part->stock < rel_lst->quantity)
+                    canBuild = false;
+            }
+            else
+            {
+                canBuild = false;
+            }
+        }
+    }
 
-        SearchSetCanBuild(sets_lst->next, rel_lst, parts_lst, search);
-    }
-    else
-    {
-        return search;
-    }
+    return search;
 }
 
 /**

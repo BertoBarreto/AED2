@@ -13,7 +13,7 @@ void ListSets(SETS *lst)
 {
     for (; lst; lst = lst->next)
     {
-        printf("%20s - %d\n", lst->theme, lst->year);
+        printf("%20s - %20s - %d\n", lst->set_num, lst->theme, lst->year);
     }
 }
 

@@ -18,21 +18,23 @@
  */
 PARTS *InsertPart(PARTS *lst, const char *part_num, const char *name, const char *part_class, int stock)
 {
-    assert(lst);
-
     PARTS *new_part = malloc(sizeof(PARTS));
-    assert(new_part);
 
     strcpy(new_part->part_num, part_num);
     strcpy(new_part->name, name);
     strcpy(new_part->class, part_class);
     new_part->stock = stock;
-    new_part->next = lst;
 
-    new_part->next = NULL;
-    new_part->previous = lst;
-    if (new_part->previous)
-        new_part->previous->next = new_part;
+    if (lst)
+        new_part->next = lst;
+    else
+        new_part->next = NULL;
+
+    if (new_part->next)
+        new_part->next->previous = new_part;
+
+    new_part->previous = NULL;
+
     return new_part;
 }
 
@@ -61,15 +63,14 @@ PARTS *NewPartList()
  * @param counter ➔ The variable that sums the stock
  * @return int ➔ The sum of the stock
  */
-int StockParts(PARTS *lst, int counter)
+int StockParts(PARTS *lst)
 {
-    if (lst)
+    int counter = 0;
+    for (; lst; lst = lst->next)
     {
         counter += lst->stock;
-        StockParts(lst->next, counter);
     }
-    else
-        return counter;
+    return counter;
 }
 
 /**
@@ -79,15 +80,14 @@ int StockParts(PARTS *lst, int counter)
  * @param counter ➔ The variable that sums the quantity
  * @return int ➔ The sum of the quantities
  */
-int SetPartsQuantity(RELATIONS *lst, int counter)
+int SetPartsQuantity(RELATIONS *lst)
 {
-    if (lst)
+    int counter = 0;
+    for (; lst; lst = lst->next)
     {
         counter += lst->quantity;
-        SetPartsQuantity(lst->next, counter);
     }
-    else
-        return counter;
+    return counter;
 }
 
 /**

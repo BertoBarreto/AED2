@@ -23,7 +23,7 @@ void ListSetsNTY(SETS *lst);
 SETS *SetsSearchByNum(SETS *sets, char *set_num);
 SETS *InsertSetsearch(SETS *lst, char *set_num, char *theme, char *name, int year);
 SETS *SearchSetbyTheme(SETS *lst, char *theme);
-SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst, SETS *search);
+SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst);
 bool ExistsSet(SETS *lst, char *set_num);
 bool ExistsTheme(SETS *lst, char *theme);
 

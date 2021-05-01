@@ -26,14 +26,16 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
     strcpy(new_relation->set_num, set_num);
     strcpy(new_relation->part_num, part_num);
     new_relation->quantity = quantity;
-    new_relation->next = NULL;
-    new_relation->previous = lst;
+
+    if (lst)
+        new_relation->next = lst;
+    else
+        new_relation->next = NULL;
 
     if (new_relation->next)
         new_relation->next->previous = new_relation;
-    if (new_relation->previous)
-        new_relation->previous->next = new_relation;
 
+    new_relation->previous = NULL;
     return new_relation;
 }
 

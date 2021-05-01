@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <parts.h>
+#include <relations.h>
 
 /**
  * @brief This function searches parts by part_num and class
@@ -15,19 +16,15 @@
  */
 PARTS *SearchPartsByNumClass(PARTS *parts, char *part_num, char *class)
 {
-    if (!parts)
-        return NULL;
-    else if (strcmp(part_num, parts->part_num) == 0)
+    for (; parts; parts = parts->next)
     {
-        if (strcmp(class, LowerString(parts->class)) == 0)
-            return parts;
-        else
-            return NULL;
+        if (strcmp(part_num, parts->part_num) == 0)
+        {
+            if (strcmp(class, LowerString(parts->class)) == 0)
+                return parts;
+        }
     }
-    else
-    {
-        return SearchPartsByNumClass(parts->next, part_num, class);
-    }
+    return NULL;
 }
 
 /**
@@ -47,7 +44,7 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
     {
         partSearch = SearchPartsByNumClass(parts, rel->part_num, class);
         if (partSearch)
-            InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
+            search = InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
     }
 
     return search;
@@ -64,13 +61,13 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
  */
 PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
 {
-    PARTS *search = NewPartList();
-    PARTS *partSearch = NewPartList();
+    PARTS *search = NULL;
+    PARTS *partSearch = NULL;
     for (; rel; rel = rel->next)
     {
         partSearch = SearchPartsByNum(parts, rel->part_num);
         if (partSearch)
-            InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
+            search = InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
     }
 
     return search;

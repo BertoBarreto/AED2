@@ -12,7 +12,7 @@
  * @see InsertPart
  * @return PARTS* ➔ list with all the parts from the parts file
  */
-void OpenParts(PARTS *parts)
+PARTS *OpenParts(PARTS *parts)
 {
     FILE *fp;
     char part_num[100];
@@ -31,6 +31,7 @@ void OpenParts(PARTS *parts)
         }
     }
     fclose(fp);
+    return parts;
 }
 
 /**
@@ -42,7 +43,7 @@ void OpenParts(PARTS *parts)
  * @see InsertSets
  * @return SETS* ➔ list with all the sets from the sets file
  */
-void OpenSets(SETS *sets)
+SETS *OpenSets(SETS *sets)
 {
     FILE *fp;
     char set_num[100];
@@ -61,6 +62,7 @@ void OpenSets(SETS *sets)
         }
     }
     fclose(fp);
+    return sets;
 }
 
 /**
@@ -72,7 +74,7 @@ void OpenSets(SETS *sets)
  * @see InsertRelation
  * @return RELATIONS* ➔ List with all the relations from the parts_sets file
  */
-void OpenRelations(RELATIONS *relations)
+RELATIONS *OpenRelations(RELATIONS *relations)
 {
     FILE *fp;
     char set_num[100];
@@ -91,4 +93,5 @@ void OpenRelations(RELATIONS *relations)
         }
     }
     fclose(fp);
+    return relations;
 }

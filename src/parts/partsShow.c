@@ -11,9 +11,10 @@
  */
 void ListParts(PARTS *lst)
 {
-    for (; lst; lst = lst->next)
+    PARTS *aux = lst->next;
+    for (; aux != lst; aux = aux->next)
     {
-        printf("\n%20s - %s", lst->part_num, lst->name);
+        printf("\n%20s - %s", aux->part_num, aux->name);
     }
 }
 
@@ -30,7 +31,6 @@ void ListPartsAndRelations(PARTS *lst_parts, RELATIONS *lst_rel)
     PARTS *aux_parts = lst_parts;
     for (; lst_rel; lst_rel = lst_rel->next)
     {
-
         for (; aux_parts; aux_parts = aux_parts->next)
         {
             if (strcmp(lst_rel->part_num, aux_parts->part_num) == 0)

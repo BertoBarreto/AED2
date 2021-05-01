@@ -7,8 +7,8 @@
 *********************/
 PARTS *InsertPart(PARTS *lst, const char *part_num, const char *name, const char *part_class, int stock);
 PARTS *NewPartList();
-int StockParts(PARTS *lst, int counter);
-int SetPartsQuantity(RELATIONS *lst, int counter);
+int StockParts(PARTS *lst);
+int SetPartsQuantity(RELATIONS *lst);
 PARTS *DeletePartsNode(PARTS *node);
 PARTS *RemovePartsbyClass(PARTS *lst, const char *class);
 
