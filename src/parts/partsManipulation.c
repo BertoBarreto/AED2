@@ -122,3 +122,24 @@ PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
     }
     return lst;
 }
+/**
+ * @brief This function allow to edit the stock of a part, if the quantity if negative it will decrease the stock,
+ * if it his positive then it will increase
+ * 
+ * @param lst ➔ List of parts
+ * @param part_num ➔ Part_num of the part to change stock
+ * @param quantity ➔ Quantity of stock to add or remove
+ */
+void EditPartStock(PARTS *lst, char *part_num, int quantity)
+{
+    for (; lst; lst = lst->next)
+    {
+        if (strcmp(lst->part_num, part_num) == 0)
+        {
+            if (lst->stock + quantity >= 0)
+                lst->stock += quantity;
+            else
+                printf("\nThere isn't enought stock to remove that quantity");
+        }
+    }
+}
