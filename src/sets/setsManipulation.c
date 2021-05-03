@@ -38,8 +38,8 @@ SETS *InsertSets(SETS *lst, char *set_num, char *name, int year, char *theme)
         new_set->next->previous = new_set;
 
     new_set->previous = NULL;
-    lst = new_set;
-    return lst;
+
+    return new_set;
 }
 
 /**   

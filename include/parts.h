@@ -11,6 +11,7 @@ int StockParts(PARTS *lst);
 int SetPartsQuantity(RELATIONS *lst);
 PARTS *DeletePartsNode(PARTS *node);
 PARTS *RemovePartsbyClass(PARTS *lst, const char *class);
+void EditPartStock(PARTS *lst, char *part_num, int quantity);
 
 /*************
 *    Show    *

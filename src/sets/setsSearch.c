@@ -70,18 +70,23 @@ SETS *SearchSetbyTheme(SETS *lst, char *theme)
  */
 SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst)
 {
-    SETS *search, *set = NULL;
+    SETS *search = NULL;
+    SETS *set = NULL;
     PARTS *part = NULL;
     bool canBuild = true;
 
     for (; rel_lst; rel_lst = rel_lst->next)
     {
+
         if (rel_lst->previous)
         {
+
             if (strcmp(rel_lst->previous->set_num, rel_lst->set_num) != 0)
             {
+
                 if (canBuild == true)
                 {
+
                     set = SetsSearchByNum(sets_lst, rel_lst->previous->set_num);
 
                     if (set)
@@ -92,9 +97,11 @@ SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst)
         }
         if (canBuild == true)
         {
+
             part = SearchPartsByNum(parts_lst, rel_lst->part_num);
             if (part)
             {
+
                 if (part->stock < rel_lst->quantity)
                     canBuild = false;
             }
