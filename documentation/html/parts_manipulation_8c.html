@@ -125,6 +125,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae891a2d93fc1321b9026be24b700e13a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_definition_8c.html#a45a444254fbcf0cd22a8beb01ab943bf">PARTS</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parts_manipulation_8c.html#ae891a2d93fc1321b9026be24b700e13a">RemovePartsbyClass</a> (<a class="el" href="list_definition_8c.html#a45a444254fbcf0cd22a8beb01ab943bf">PARTS</a> *lst, const char *class)</td></tr>
 <tr class="memdesc:ae891a2d93fc1321b9026be24b700e13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function removes all the parts with a specific class.  <a href="parts_manipulation_8c.html#ae891a2d93fc1321b9026be24b700e13a">More...</a><br /></td></tr>
 <tr class="separator:ae891a2d93fc1321b9026be24b700e13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ec3f5c8334388bc542f093181648ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parts_manipulation_8c.html#a66ec3f5c8334388bc542f093181648ae">EditPartStock</a> (<a class="el" href="list_definition_8c.html#a45a444254fbcf0cd22a8beb01ab943bf">PARTS</a> *lst, char *part_num, int quantity)</td></tr>
+<tr class="memdesc:a66ec3f5c8334388bc542f093181648ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function allow to edit the stock of a part, if the quantity if negative it will decrease the stock, if it his positive then it will increase.  <a href="parts_manipulation_8c.html#a66ec3f5c8334388bc542f093181648ae">More...</a><br /></td></tr>
+<tr class="separator:a66ec3f5c8334388bc542f093181648ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a320a376fc9eaa5232b7a51a0661081e5"></a>
@@ -151,6 +154,50 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>PARTS* ➔ List without the deleted node </dd></dl>
+
+</div>
+</div>
+<a id="a66ec3f5c8334388bc542f093181648ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66ec3f5c8334388bc542f093181648ae">&#9670;&nbsp;</a></span>EditPartStock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EditPartStock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_definition_8c.html#a45a444254fbcf0cd22a8beb01ab943bf">PARTS</a> *&#160;</td>
+          <td class="paramname"><em>lst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>part_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>quantity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function allow to edit the stock of a part, if the quantity if negative it will decrease the stock, if it his positive then it will increase. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lst</td><td>➔ List of parts </td></tr>
+    <tr><td class="paramname">part_num</td><td>➔ Part_num of the part to change stock </td></tr>
+    <tr><td class="paramname">quantity</td><td>➔ Quantity of stock to add or remove </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
