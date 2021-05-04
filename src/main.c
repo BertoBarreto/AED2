@@ -46,7 +46,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         printf("\n** 9-Add set and set parts to stock             **");
         printf("\n** 10-Delete all parts with specific class      **");
         printf("\n** 11-Delete all sets with specific theme       **");
-        printf("\n** 0-Exit                                       **");
+        printf("\n** 0-exist                                       **");
         printf("\n**************************************************");
         printf("\nOption: ");
         scanf("%d", &option);
@@ -62,7 +62,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
                 fflush(stdin);
                 printf("\n There is no set with that theme(maybe you wrote it wrong)");
-                printf("\nDo you wish to exit?[Y/N]");
+                printf("\nDo you wish to exists?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
@@ -102,7 +102,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
                 fflush(stdin);
                 printf("There is no part with that class(maybe you wrote it wrong)");
-                printf("\nDo you wish to exit?[Y/N]");
+                printf("\nDo you wish to exists?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
@@ -119,7 +119,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 {
                     fflush(stdin);
                     printf("\nThere is no Set with that number(maybe you wrote it wrong)");
-                    printf("\nDo you wish to exit?[Y/N]");
+                    printf("\nDo you wish to exists?[Y/N]");
                     scanf("%c", &decision);
                     if (tolower(decision) == 'n')
                     {
@@ -160,7 +160,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
                 fflush(stdin);
                 printf("The Set you are looking for doesnt exist(maybe you wrote it wrong)");
-                printf("\nDo you wish to exit?[Y/N]");
+                printf("\nDo you wish to exists?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
@@ -207,7 +207,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
                 fflush(stdin);
                 printf("The Set you are looking for doesnt exist(maybe you wrote it wrong)");
-                printf("\nDo you wish to exit?[Y/N]");
+                printf("\nDo you wish to exists?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
@@ -269,7 +269,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
                 fflush(stdin);
                 printf("\nThere is no part with that number(maybe you wrote it wrong)");
-                printf("\nDo you wish to exit?[Y/N]");
+                printf("\nDo you wish to exists?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
@@ -296,73 +296,107 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
 #pragma region Add_Set_Parts
         case 9:
-            decision = 'n';
+
             fflush(stdin);
             printf("\nSet num: ");
             scanf("%[^\n]", set_num);
-            fflush(stdin);
-            printf("\nSet name: ");
-            scanf("%[^\n]", set_name);
-            fflush(stdin);
-            printf("\nSet theme: ");
-            scanf("%[^\n]", theme);
-            fflush(stdin);
-            printf("\nSet year: ");
-            scanf("%d", &year);
-            sets_list = InsertSets(sets_list, set_num, set_name,
-                                   year, theme);
-            do
+            while (ExistsSet(sets_list, set_num) == true && exists == false)
             {
                 fflush(stdin);
-                printf("Do you wish to add a new part?[Y/N]");
+                printf("There is already a set with that set_num (maybe you wrote it wrong)");
+                printf("Do you wish to add it[Y/N]?");
                 scanf("%c", &decision);
+
                 if (tolower(decision) == 'y')
                 {
-                    fflush(stdin);
-                    printf("\nPart num: ");
-                    scanf("%[^\n]", part_num);
-                    fflush(stdin);
-                    printf("\nPart name: ");
-                    scanf("%[^\n]", part_name);
-                    fflush(stdin);
-                    printf("\nPart class: ");
-                    scanf("%[^\n]", part_class);
-                    fflush(stdin);
-                    printf("\nPart quantity: ");
-                    scanf("%d", &quantity);
-
-                    parts_list = InsertPart(parts_list, part_num,
-                                            part_name, part_class, quantity);
-                    relations_list = InsertRelation(relations_list, set_num,
-                                                    quantity, part_num);
+                    exists = true;
+                    search_sets = SetsSearchByNum(sets_list, set_num);
+                    search_relations = SearchRelations(relations_list, search_sets->set_num);
+                    for (; search_relations; search_relations = search_relations->next)
+                    {
+                        EditPartStock(parts_list, search_relations->part_num, search_relations->quantity);
+                    }
                 }
                 else
                 {
+                    fflush(stdin);
+                    printf("\nSet num: ");
+                    scanf("%[^\n]", set_num);
+                }
+            }
+
+            if (exists == false)
+            {
+                fflush(stdin);
+                printf("\nSet name: ");
+                scanf("%[^\n]", set_name);
+                fflush(stdin);
+                printf("\nSet theme: ");
+                scanf("%[^\n]", theme);
+                fflush(stdin);
+                printf("\nSet year: ");
+                scanf("%d", &year);
+                sets_list = InsertSets(sets_list, set_num, set_name,
+                                       year, theme);
+
+                do
+                {
 
                     fflush(stdin);
                     printf("\nPart num: ");
                     scanf("%[^\n]", part_num);
-                    while (ExistsPart(parts_list, part_num) == false)
+                    while (ExistsPart(parts_list, part_num) == true && exists == false)
                     {
                         fflush(stdin);
-                        printf("There is no part with that part_num (maybe you wrote it wrong)");
-                        printf("\nPart num: ");
-                        scanf("%[^\n]", part_num);
+                        printf("There is already a part with that part_num (maybe you wrote it wrong)");
+                        fflush(stdin);
+                        printf("Do you wish to add it[Y/N]?");
+                        scanf("%c", &decision);
+
+                        if (tolower(decision) == 'y')
+                        {
+                            fflush(stdin);
+                            printf("\nPart quantity: ");
+                            scanf("%d", &quantity);
+
+                            search_parts = SearchPartsByNum(parts_list, part_num);
+                            EditPartStock(parts_list, search_parts->part_num, quantity);
+
+                            relations_list = InsertRelation(relations_list, set_num, quantity, part_num);
+                            exists = true;
+                        }
+                        else
+                        {
+                            printf("\nPart num: ");
+                            scanf("%[^\n]", part_num);
+                        }
+                        if (exists)
+                            break;
+                    }
+                    if (exists == false)
+                    {
+                        fflush(stdin);
+                        printf("\nPart name: ");
+                        scanf("%[^\n]", part_name);
+                        fflush(stdin);
+                        printf("\nPart class: ");
+                        scanf("%[^\n]", part_class);
+                        fflush(stdin);
+                        printf("\nPart quantity needed: ");
+                        scanf("%d", &quantity);
+
+                        parts_list = InsertPart(parts_list, part_num,
+                                                part_name, part_class, quantity);
+                        relations_list = InsertRelation(relations_list, set_num,
+                                                        quantity, part_num);
                     }
                     fflush(stdin);
-                    printf("\nPart quantity: ");
-                    scanf("%d", &quantity);
-
-                    search_parts = SearchPartsByNum(parts_list, part_num);
-
-                    search_parts->stock += quantity;
-
-                    relations_list = InsertRelation(relations_list, set_num, quantity, part_num);
-                }
-                fflush(stdin);
-                printf("\nDo u wish to add more parts?[Y/N]");
-                scanf("%c", &decision);
-            } while (tolower(decision) == 'y');
+                    printf("\nDo u wish to add more parts?[Y/N]");
+                    scanf("%c", &decision);
+                    exists = false;
+                } while (tolower(decision) == 'y');
+            }
+            exists = false;
             search_relations = SearchRelations(relations_list, set_num);
             printf("\nPart_num    Name  Class   Stock   Quantity");
             ListPartsAndRelations(parts_list, search_relations);
