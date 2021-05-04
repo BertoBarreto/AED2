@@ -87,15 +87,18 @@ PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
  */
 PARTS *SearchPartsByNum(PARTS *parts, char *part_num)
 {
-
-    for (; parts; parts = parts->next)
+    PARTS *aux = parts;
+    PARTS *auxSearch = NULL;
+    for (; aux; aux = aux->next)
     {
 
-        if (strcmp(part_num, parts->part_num) == 0)
+        if (strcmp(part_num, aux->part_num) == 0)
         {
-            return parts;
+            auxSearch = InsertPart(auxSearch, aux->part_num, aux->name, aux->class, aux->stock);
+            return auxSearch;
         }
     }
+    return NULL;
 }
 
 /**

@@ -12,9 +12,10 @@
 void ListParts(PARTS *lst)
 {
     PARTS *aux = lst->next;
+    printf("\nPart_num    Name  Class   Stock   Quantity");
     for (; aux != lst; aux = aux->next)
     {
-        printf("\n%20s - %s", aux->part_num, aux->name);
+        printf("\n%s - %s - %s - %d - %d", aux->part_num, aux->name, aux->class, aux->stock);
     }
 }
 
@@ -37,19 +38,5 @@ void ListPartsAndRelations(PARTS *lst_parts, RELATIONS *lst_rel)
                 printf("\n%s - %s - %s - %d - %d", aux_parts->part_num, aux_parts->name, aux_parts->class, aux_parts->stock, lst_rel->quantity);
         }
         aux_parts = lst_parts;
-    }
-}
-
-/**
- * @brief This function iterates through the parts list, printing part_num and name.
- * part_num - name - stock
- * 
- * @param lst ➔ Parts list to show
- */
-void ListPartsStock(PARTS *lst)
-{
-    for (; lst; lst = lst->next)
-    {
-        printf("\n%s - %s - %d", lst->part_num, lst->name, lst->stock);
     }
 }
