@@ -37,7 +37,7 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
 
     new_relation->previous = NULL;
     lst = new_relation;
-    //free(new_relation);
+
     return lst;
 }
 
@@ -103,7 +103,6 @@ RELATIONS *RemoveRelationsbySet(RELATIONS *lst, const char *set_num)
     }
     return lst;
 }
-
 
 void FreeRelations(RELATIONS *lst)
 {
