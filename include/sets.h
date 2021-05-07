@@ -27,4 +27,6 @@ SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst);
 bool ExistsSet(SETS *lst, char *set_num);
 bool ExistsTheme(SETS *lst, char *theme);
 
+
+void FreeSets(SETS *lst);
 #endif
