@@ -35,7 +35,7 @@ PARTS *InsertPart(PARTS *lst, const char *part_num, const char *name, const char
 
     new_part->previous = NULL;
     lst = new_part;
-    //free(new_part);
+
     return lst;
 }
 

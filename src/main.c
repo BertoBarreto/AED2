@@ -19,7 +19,6 @@
 void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 {
     int option, quantity, year;
-    PARTS *part_Set = NULL;
     char part_num[100], part_class[100], part_name[100],
         set_name[100], set_num[100], theme[100], decision;
 
@@ -61,14 +60,12 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             while (ExistsTheme(sets_list, LowerString(theme)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\n There is no set with that theme(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\n Theme to search: ");
                     scanf("%[^\n]", theme);
                 }
@@ -90,7 +87,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 }
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             free(search_sets);
@@ -101,21 +97,18 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 2:
             decision = 'n';
             clean_stdin();
-            ;
             printf("\nPart Class to search: ");
             scanf("%[^\n]", part_class);
             while (ExistsClass(parts_list, LowerString(part_class)) == false && tolower(decision) != 'y')
             {
 
                 clean_stdin();
-                ;
                 printf("There is no part with that class(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\nPart Class to search: ");
                     scanf("%[^\n]", part_class);
                 }
@@ -123,20 +116,17 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             if (decision == 'n')
             {
                 clean_stdin();
-                ;
                 printf("\nSet Number to search: ");
                 scanf("%[^\n]", set_num);
                 while (ExistsSet(sets_list, set_num) == false && tolower(decision) != 'y')
                 {
                     clean_stdin();
-                    ;
                     printf("\nThere is no Set with that number(maybe you wrote it wrong)");
                     printf("\nDo you wish to exit?[Y/N]");
                     scanf("%c", &decision);
                     if (tolower(decision) == 'n')
                     {
                         clean_stdin();
-                        ;
                         printf("\nSet Number to search: ");
                         scanf("%[^\n]", set_num);
                     }
@@ -158,7 +148,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
                     printf("\n(ENTER)");
                     clean_stdin();
-                    ;
                     getchar();
                 }
             }
@@ -169,20 +158,17 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 3:
             decision = 'n';
             clean_stdin();
-            ;
             printf("\n Set number: ");
             scanf("%[^\n]", set_num);
             while (ExistsSet(sets_list, LowerString(set_num)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("The Set you are looking for doesnt exist(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\n Set number: ");
                     scanf("%[^\n]", set_num);
                 }
@@ -204,7 +190,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 }
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -214,7 +199,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             printf("\nParts in stock: %d parts", StockParts(parts_list));
             printf("\n(ENTER)");
             clean_stdin();
-            ;
             getchar();
             break;
 
@@ -222,20 +206,17 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 5:
             decision = 'n';
             clean_stdin();
-            ;
             printf("\n Set number: ");
             scanf("%[^\n]", set_num);
             while (ExistsSet(sets_list, LowerString(set_num)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("The Set you are looking for doesnt exist(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\n Set number: ");
                     scanf("%[^\n]", set_num);
                 }
@@ -255,7 +236,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 }
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -285,7 +265,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             ListSets(search_sets);
             printf("\n(ENTER)");
             clean_stdin();
-            ;
             getchar();
             break;
 #pragma endregion
@@ -294,20 +273,17 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 8:
             decision = 'n';
             clean_stdin();
-            ;
             printf("\n Part num:");
             scanf("%[^\n]", part_num);
             while (ExistsPart(parts_list, part_num) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\nThere is no part with that number(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\n Part num:");
                     scanf("%[^\n]", part_num);
                 }
@@ -315,7 +291,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             if (decision == 'n')
             {
                 clean_stdin();
-                ;
                 printf("\n Stock(-1 -> removes | 1 -> adds):");
                 scanf("%d", &quantity);
 
@@ -325,7 +300,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 printf("\n%-10s - %-20s - %d", search_parts->part_num, search_parts->name, search_parts->stock);
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -335,13 +309,11 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 9:
 
             clean_stdin();
-            ;
             printf("\nSet num: ");
             scanf("%[^\n]", set_num);
             while (ExistsSet(sets_list, set_num) == true && exists == false)
             {
                 clean_stdin();
-                ;
                 printf("There is already a set with that set_num (maybe you wrote it wrong)");
                 printf("Do you wish to add it[Y/N]?");
                 scanf("%c", &decision);
@@ -358,7 +330,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 else
                 {
                     clean_stdin();
-                    ;
                     printf("\nSet num: ");
                     scanf("%[^\n]", set_num);
                 }
@@ -367,15 +338,12 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             if (exists == false)
             {
                 clean_stdin();
-                ;
                 printf("\nSet name: ");
                 scanf("%[^\n]", set_name);
                 clean_stdin();
-                ;
                 printf("\nSet theme: ");
                 scanf("%[^\n]", theme);
                 clean_stdin();
-                ;
                 printf("\nSet year: ");
                 scanf("%d", &year);
                 sets_list = InsertSets(sets_list, set_num, set_name,
@@ -385,23 +353,19 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 {
 
                     clean_stdin();
-                    ;
                     printf("\nPart num: ");
                     scanf("%[^\n]", part_num);
                     while (ExistsPart(parts_list, part_num) == true && exists == false)
                     {
                         clean_stdin();
-                        ;
                         printf("There is already a part with that part_num (maybe you wrote it wrong)");
                         clean_stdin();
-                        ;
                         printf("Do you wish to add it[Y/N]?");
                         scanf("%c", &decision);
 
                         if (tolower(decision) == 'y')
                         {
                             clean_stdin();
-                            ;
                             printf("\nPart quantity: ");
                             scanf("%d", &quantity);
 
@@ -413,7 +377,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                         else
                         {
                             clean_stdin();
-                            ;
                             printf("\nPart num: ");
                             scanf("%[^\n]", part_num);
                         }
@@ -423,15 +386,12 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     if (exists == false)
                     {
                         clean_stdin();
-                        ;
                         printf("\nPart name: ");
                         scanf("%[^\n]", part_name);
                         clean_stdin();
-                        ;
                         printf("\nPart class: ");
                         scanf("%[^\n]", part_class);
                         clean_stdin();
-                        ;
                         printf("\nPart quantity needed: ");
                         scanf("%d", &quantity);
 
@@ -441,7 +401,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                                                         quantity, part_num);
                     }
                     clean_stdin();
-                    ;
                     printf("\nDo u wish to add more parts?[Y/N]");
                     scanf("%c", &decision);
                     exists = false;
@@ -453,7 +412,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             ListPartsAndRelations(parts_list, search_relations);
             printf("\n(ENTER)");
             clean_stdin();
-            ;
             getchar();
             break;
 #pragma endregion
@@ -462,20 +420,17 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 10:
             decision = 'n';
             clean_stdin();
-            ;
             printf("\n Part class to remove: ");
             scanf("%[^\n]", part_class);
             while (ExistsClass(parts_list, LowerString(part_class)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\n There is no part with that class");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\n Part class to remove: ");
                     scanf("%[^\n]", part_class);
                 }
@@ -487,7 +442,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 do
                 {
                     clean_stdin();
-                    ;
                     printf("\n Do you wish to see the list?[Y/N]");
                     scanf("%c", &decision);
                 } while (tolower(decision) != 'y' && tolower(decision) != 'n');
@@ -496,7 +450,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     ListParts(parts_list);
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -506,20 +459,17 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 11:
             decision = 'n';
             clean_stdin();
-            ;
             printf("\n Sets Theme to remove: ");
             scanf("%[^\n]", theme);
             while (ExistsTheme(sets_list, LowerString(theme)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\n There is no set with that theme");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\n Sets Theme to remove: ");
                     scanf("%[^\n]", theme);
                 }
@@ -531,7 +481,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 do
                 {
                     clean_stdin();
-                    ;
                     printf("\n Do you wish to see the list?[Y/N]");
                     scanf("%c", &decision);
                 } while (tolower(decision) != 'y' && tolower(decision) != 'n');
@@ -540,7 +489,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     ListSets(sets_list);
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
