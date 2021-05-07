@@ -91,7 +91,7 @@ RELATIONS *RemoveRelationsbySet(RELATIONS *lst, const char *set_num)
             else
                 lst = aux->next;
 
-            aux = DeleteSetsNode(aux);
+            aux = DeleteRelationsNode(aux);
             found = true;
         }
         else

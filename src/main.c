@@ -90,6 +90,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 fflush(stdin);
                 getchar();
             }
+            free(search_sets);
             break;
 #pragma endregion
 
