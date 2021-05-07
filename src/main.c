@@ -89,7 +89,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 clean_stdin();
                 getchar();
             }
-            free(search_sets);
             break;
 #pragma endregion
 
@@ -133,7 +132,8 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 }
                 if (decision == 'n')
                 {
-                    search_parts = PartsSearchByClassAndSet(parts_list, SearchRelations(relations_list, set_num), LowerString(part_class));
+                    search_relations = SearchRelations(relations_list, set_num);
+                    search_parts = PartsSearchByClassAndSet(parts_list, search_relations, LowerString(part_class));
 
                     if (search_parts)
                     {
@@ -302,6 +302,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 clean_stdin();
                 getchar();
             }
+            search_parts = NULL;
             break;
 #pragma endregion
 
@@ -357,7 +358,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     scanf("%[^\n]", part_num);
                     while (ExistsPart(parts_list, part_num) == true && exists == false)
                     {
-                        clean_stdin();
                         printf("There is already a part with that part_num (maybe you wrote it wrong)");
                         clean_stdin();
                         printf("Do you wish to add it[Y/N]?");
@@ -496,9 +496,13 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 
         case 0:
             exit = true;
+
             FreeParts(search_parts);
+
             FreeRelations(search_relations);
+
             FreeSets(search_sets);
+
             break;
 
         default:

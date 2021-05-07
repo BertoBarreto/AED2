@@ -76,7 +76,6 @@ PARTCOUNTER *InsertCounterSearch(PARTCOUNTER *lst, char *part_num)
         counter->counter = 1;
         counter->next = lst;
         lst = counter;
-        free(counter);
     }
     else if (strcmp(part_num, lst->part_num) == 0)
     {
