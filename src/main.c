@@ -61,7 +61,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             while (ExistsTheme(sets_list, LowerString(theme)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\n There is no set with that theme(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
@@ -90,7 +89,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 }
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             free(search_sets);
@@ -108,7 +106,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
 
                 clean_stdin();
-                ;
                 printf("There is no part with that class(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
@@ -123,7 +120,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             if (decision == 'n')
             {
                 clean_stdin();
-                ;
                 printf("\nSet Number to search: ");
                 scanf("%[^\n]", set_num);
                 while (ExistsSet(sets_list, set_num) == false && tolower(decision) != 'y')
@@ -175,7 +171,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             while (ExistsSet(sets_list, LowerString(set_num)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("The Set you are looking for doesnt exist(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
@@ -204,7 +199,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 }
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -228,7 +222,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             while (ExistsSet(sets_list, LowerString(set_num)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("The Set you are looking for doesnt exist(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
@@ -255,7 +248,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 }
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -281,11 +273,15 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 #pragma region Sets_Can_Be_Built
         case 7:
 
+            t = clock();
             search_sets = SearchSetCanBuild(sets_list, relations_list, parts_list);
+            t = clock() - t;
             ListSets(search_sets);
+            double time_taken = ((double)t) / CLOCKS_PER_SEC;
+            printf("took: %f", time_taken);
             printf("\n(ENTER)");
             clean_stdin();
-            ;
+
             getchar();
             break;
 #pragma endregion
@@ -294,20 +290,18 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 8:
             decision = 'n';
             clean_stdin();
-            ;
+
             printf("\n Part num:");
             scanf("%[^\n]", part_num);
             while (ExistsPart(parts_list, part_num) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\nThere is no part with that number(maybe you wrote it wrong)");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
                 if (tolower(decision) == 'n')
                 {
                     clean_stdin();
-                    ;
                     printf("\n Part num:");
                     scanf("%[^\n]", part_num);
                 }
@@ -315,7 +309,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             if (decision == 'n')
             {
                 clean_stdin();
-                ;
                 printf("\n Stock(-1 -> removes | 1 -> adds):");
                 scanf("%d", &quantity);
 
@@ -325,7 +318,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 printf("\n%-10s - %-20s - %d", search_parts->part_num, search_parts->name, search_parts->stock);
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -341,7 +333,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             while (ExistsSet(sets_list, set_num) == true && exists == false)
             {
                 clean_stdin();
-                ;
                 printf("There is already a set with that set_num (maybe you wrote it wrong)");
                 printf("Do you wish to add it[Y/N]?");
                 scanf("%c", &decision);
@@ -367,15 +358,12 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             if (exists == false)
             {
                 clean_stdin();
-                ;
                 printf("\nSet name: ");
                 scanf("%[^\n]", set_name);
                 clean_stdin();
-                ;
                 printf("\nSet theme: ");
                 scanf("%[^\n]", theme);
                 clean_stdin();
-                ;
                 printf("\nSet year: ");
                 scanf("%d", &year);
                 sets_list = InsertSets(sets_list, set_num, set_name,
@@ -468,7 +456,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             while (ExistsClass(parts_list, LowerString(part_class)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\n There is no part with that class");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
@@ -496,7 +483,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     ListParts(parts_list);
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
@@ -512,7 +498,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             while (ExistsTheme(sets_list, LowerString(theme)) == false && tolower(decision) != 'y')
             {
                 clean_stdin();
-                ;
                 printf("\n There is no set with that theme");
                 printf("\nDo you wish to exit?[Y/N]");
                 scanf("%c", &decision);
@@ -540,7 +525,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                     ListSets(sets_list);
                 printf("\n(ENTER)");
                 clean_stdin();
-                ;
                 getchar();
             }
             break;
