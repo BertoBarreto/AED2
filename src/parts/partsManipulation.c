@@ -122,6 +122,7 @@ PARTS *RemovePartsbyClass(PARTS *lst, const char *class)
     }
     return lst;
 }
+
 /**
  * @brief This function allow to edit the stock of a part, if the quantity if negative it will decrease the stock,
  * if it his positive then it will increase

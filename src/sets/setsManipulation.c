@@ -56,7 +56,6 @@ void OrderSetbyYear(SETS *lst)
 
     int swapped;
     SETS *ptr = NULL;
-    SETS *lptr = NULL;
 
     if (!lst)
         return;
@@ -67,7 +66,7 @@ void OrderSetbyYear(SETS *lst)
         swapped = 0;
         ptr = lst;
 
-        while (ptr->next != lptr)
+        while (ptr->next)
         {
             if (ptr->year > ptr->next->year)
             {
@@ -76,7 +75,6 @@ void OrderSetbyYear(SETS *lst)
             }
             ptr = ptr->next;
         }
-        lptr = ptr;
     } while (swapped == 1);
 }
 
@@ -136,21 +134,23 @@ SETS *DeleteSetsNode(SETS *node)
  * @see LowerString
  * @see DeleteSetsNode
  */
-SETS *RemoveSetsbyTheme(SETS *lst, const char *theme)
+SETS *RemoveSetsbyTheme(SETS *lst, RELATIONS *rel_lst, const char *theme)
 {
     SETS *aux = lst;
 
     while (aux)
     {
         if (strcmp(LowerString(aux->theme), theme) == 0)
-        {                  // aux é o nodo a remover
-            if (aux->next) // não último nodo
+        {
+            if (aux->next)
                 aux->next->previous = aux->previous;
 
-            if (aux->previous) // não é o primeiro nodo!
+            if (aux->previous)
                 aux->previous->next = aux->next;
-            else                 // é o primeiro nodo
-                lst = aux->next; // apenas no caso de ser o 1º
+            else
+                lst = aux->next;
+
+            rel_lst = RemoveRelationsbySet(rel_lst, LowerString(aux->set_num));
 
             aux = DeleteSetsNode(aux);
         }

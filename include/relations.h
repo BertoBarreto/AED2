@@ -7,7 +7,7 @@
 *    Manipulation    *
 *********************/
 RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *part_num);
-RELATIONS *NewRelationsList();
+RELATIONS *RemoveRelationsbySet(RELATIONS *lst, const char *set_num);
 /*************
 *    Show    *
 *************/

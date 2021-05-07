@@ -38,3 +38,66 @@ RELATIONS *InsertRelation(RELATIONS *lst, char *set_num, int quantity, char *par
     new_relation->previous = NULL;
     return new_relation;
 }
+
+/**
+ * @brief This funtion deletes a node from a relations list.
+ * 
+ * @param node ➔ node to delete
+ * @return Relations* ➔ list without the deleted node
+ */
+RELATIONS *DeleteRelationsNode(RELATIONS *node)
+{
+    RELATIONS *toDelete = node;
+    node = toDelete->next;
+    free(toDelete);
+
+    return node;
+}
+
+/**
+ * @brief This function removes all the relations with a specific theme.
+ * @brief This function iterates through the relations list checking if the actual set is the same set as the one to remove.Then it checks if there is any 
+ * realtion after the actual relation and sets the next relation previous relation to the actual relation previous relation, then it checks if there is any previous relation and if there is
+ * it will set the varible next relation from the previous relation to the actual relation next relation. After all of that clutter it deletes the actual node and repeates the cycle.
+ * 
+ * @param lst ➔ The realtions list
+ * @param theme ➔ The set to delete
+ * @return Relations* ➔ List with relations removed
+ * @see LowerString
+ * @see DeleteSetsNode
+ */
+RELATIONS *RemoveRelationsbySet(RELATIONS *lst, const char *set_num)
+{
+    RELATIONS *aux = lst;
+    bool found = false;
+
+    while (aux)
+    {
+        if (found = true)
+        {
+            if (strcmp(aux->next->set_num, set_num) != 0)
+            {
+                return lst;
+            }
+        }
+        if (strcmp(LowerString(aux->set_num), set_num) == 0)
+        {
+
+            if (aux->next)
+                aux->next->previous = aux->previous;
+
+            if (aux->previous)
+                aux->previous->next = aux->next;
+            else
+                lst = aux->next;
+
+            aux = DeleteSetsNode(aux);
+            found = true;
+        }
+        else
+        {
+            aux = aux->next;
+        }
+    }
+    return lst;
+}
