@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <parts.h>
+#include <sets.h>
+#include <relations.h>
 
 /**
  * @brief This function reads the parts.tsv file and inserts its values in a parts list

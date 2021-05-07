@@ -39,7 +39,7 @@ SETS *InsertSets(SETS *lst, char *set_num, char *name, int year, char *theme)
         new_set->next->previous = new_set;
 
     new_set->previous = NULL;
-    lst= new_set;
+    lst = new_set;
     //free(new_set);
     return lst;
 }
@@ -164,9 +164,12 @@ SETS *RemoveSetsbyTheme(SETS *lst, RELATIONS *rel_lst, const char *theme)
     return lst;
 }
 
-void FreeSets(SETS *lst){
-    if(lst){
-        FreeSets(lst->next);
+void FreeSets(SETS *lst)
+{
+    while (lst)
+    {
+        SETS *next = lst->next;
         free(lst);
+        lst = next;
     }
 }
