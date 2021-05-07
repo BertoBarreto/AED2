@@ -31,4 +31,6 @@ PARTS *SearchPartsByClass(PARTS *parts, char *class);
 bool ExistsPart(PARTS *lst, char *part_num);
 bool ExistsClass(PARTS *lst, char *class);
 
+
+void FreeParts(PARTS *lst);
 #endif

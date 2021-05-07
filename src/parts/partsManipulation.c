@@ -34,8 +34,9 @@ PARTS *InsertPart(PARTS *lst, const char *part_num, const char *name, const char
         new_part->next->previous = new_part;
 
     new_part->previous = NULL;
-
-    return new_part;
+    lst = new_part;
+    //free(new_part);
+    return lst;
 }
 
 /**
@@ -142,5 +143,12 @@ void EditPartStock(PARTS *lst, char *part_num, int quantity)
             else
                 printf("\nThere isn't enought stock to remove that quantity");
         }
+    }
+}
+
+void FreeParts(PARTS *lst){
+    if(lst){
+        FreeParts(lst->next);
+        free(lst);
     }
 }

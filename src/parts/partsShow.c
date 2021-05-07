@@ -12,10 +12,10 @@
 void ListParts(PARTS *lst)
 {
     PARTS *aux = lst->next;
-    printf("\nPart_num    Name  Class   Stock   Quantity");
+    printf("\nPart_num    Name  Class   Stock");
     for (; aux != lst; aux = aux->next)
     {
-        printf("\n%s - %s - %s - %d - %d", aux->part_num, aux->name, aux->class, aux->stock);
+        printf("\n%s - %s - %s - %d", aux->part_num, aux->name, aux->class, aux->stock);
     }
 }
 

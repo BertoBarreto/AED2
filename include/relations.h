@@ -20,4 +20,6 @@ RELATIONS *SearchPartsRelations(RELATIONS *rel, char *part_num);
 bool SearchCanBuildRelations(RELATIONS *rel_lst, PARTS *parts_lst, char *set_num, bool gotNext);
 char *MoreUsedPart(RELATIONS *lst);
 
+void FreeRelations(RELATIONS *lst);
+
 #endif
