@@ -4,10 +4,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+/**
+ * @brief This function cleans the buffer from the console
+ * 
+ */
 void clean_stdin(void)
 {
     int c;
-    do {
+    do
+    {
         c = getchar();
     } while (c != '\n' && c != EOF);
 }

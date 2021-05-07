@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['editpartstock_95',['EditPartStock',['../parts_manipulation_8c.html#a66ec3f5c8334388bc542f093181648ae',1,'partsManipulation.c']]],
-  ['existsclass_96',['ExistsClass',['../parts_search_8c.html#a453986ccf499def704371cc948e61b6e',1,'partsSearch.c']]],
-  ['existspart_97',['ExistsPart',['../parts_search_8c.html#a73cc3af64b8ab0f995719e7b9953a4c9',1,'partsSearch.c']]],
-  ['existsset_98',['ExistsSet',['../sets_search_8c.html#a1b40f704df6b74b4c122e0257e51d119',1,'setsSearch.c']]],
-  ['existstheme_99',['ExistsTheme',['../sets_search_8c.html#a24ef62947247869d909e7089e36b5863',1,'setsSearch.c']]]
+  ['deletepartsnode_96',['DeletePartsNode',['../parts_manipulation_8c.html#a320a376fc9eaa5232b7a51a0661081e5',1,'partsManipulation.c']]],
+  ['deleterelationsnode_97',['DeleteRelationsNode',['../rel_manipulation_8c.html#a14dd962db3df7c1b17855863215cbe17',1,'relManipulation.c']]],
+  ['deletesetsnode_98',['DeleteSetsNode',['../sets_manipulation_8c.html#afef545119351ea3cdc0f0e3cd7a61c88',1,'setsManipulation.c']]]
 ];

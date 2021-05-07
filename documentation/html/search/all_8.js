@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['openparts_33',['OpenParts',['../read_files_8c.html#ad643e3678f935c4a2f92a1a9dae37cce',1,'readFiles.c']]],
-  ['openrelations_34',['OpenRelations',['../read_files_8c.html#aac6a9729044a6b74495e9cd1a545f7a8',1,'readFiles.c']]],
-  ['opensets_35',['OpenSets',['../read_files_8c.html#a61b224ae1a1b5d7d5dd6047d65e0ad8a',1,'readFiles.c']]],
-  ['ordersetbyyear_36',['OrderSetbyYear',['../sets_manipulation_8c.html#af4dee13401f9f13722e1b69b2b6a9c7c',1,'setsManipulation.c']]]
+  ['name_35',['name',['../struct__parts.html#a674534cf27f6822f083932fb6dd2d52b',1,'_parts::name()'],['../struct__sets.html#adb4511823d0ee321d3df7ddbec9a6948',1,'_sets::name()']]],
+  ['next_36',['next',['../struct__parts.html#aa9142ccca5401ed54efa06737325d17d',1,'_parts::next()'],['../struct__sets.html#af7b76c551d8f362a92fb45c41a187d95',1,'_sets::next()'],['../struct__relations.html#ade560152782672c1c91373723b79d16c',1,'_relations::next()'],['../struct__part__counter.html#a9df6e5b4fba70e3f407a59cfffdf2336',1,'_part_counter::next()']]]
 ];

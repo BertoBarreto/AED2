@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['listdefinition_2ec_18',['listDefinition.c',['../list_definition_8c.html',1,'']]],
-  ['listmanipulation_2ec_19',['listManipulation.c',['../list_manipulation_8c.html',1,'']]],
-  ['listparts_20',['ListParts',['../parts_show_8c.html#af5d2f6802d1247ff595e878169f7871e',1,'partsShow.c']]],
-  ['listpartsandrelations_21',['ListPartsAndRelations',['../parts_show_8c.html#acae6c6ca01877b87ae78e3faec111a1d',1,'partsShow.c']]],
-  ['listrelations_22',['ListRelations',['../rel_show_8c.html#ab290afd7de577f52d02734d96b57e712',1,'relShow.c']]],
-  ['listsets_23',['ListSets',['../sets_show_8c.html#a2d98c1bf419adbd7fdfbb70fa7d8a1a8',1,'setsShow.c']]],
-  ['listsetsnty_24',['ListSetsNTY',['../sets_show_8c.html#a56d19e900f09219d3ea0e48abaca7ab1',1,'setsShow.c']]],
-  ['lowerstring_25',['LowerString',['../list_manipulation_8c.html#a1a5bf1d19187d4dd04ff85e086773f9c',1,'listManipulation.c']]]
+  ['insertcountersearch_18',['InsertCounterSearch',['../rel_search_8c.html#af08d46db4e6e0ed630272731ba869aac',1,'relSearch.c']]],
+  ['insertpart_19',['InsertPart',['../parts_manipulation_8c.html#ae01dd1cdd091995b197a969eaee5fb76',1,'partsManipulation.c']]],
+  ['insertrelation_20',['InsertRelation',['../rel_manipulation_8c.html#acbebda2c4b54d419dda8339e1cad453c',1,'relManipulation.c']]],
+  ['insertsets_21',['InsertSets',['../sets_manipulation_8c.html#a09df8a0fcd718b04ea9e8d3a6cf7e709',1,'setsManipulation.c']]]
 ];

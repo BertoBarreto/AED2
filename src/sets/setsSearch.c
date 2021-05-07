@@ -111,8 +111,6 @@ SETS *SearchSetCanBuild(SETS *sets_lst, RELATIONS *rel_lst, PARTS *parts_lst)
             }
         }
     }
-    //free(set);
-    //free(part);
     return search;
 }
 

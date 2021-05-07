@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['insertcountersearch_14',['InsertCounterSearch',['../rel_search_8c.html#af08d46db4e6e0ed630272731ba869aac',1,'relSearch.c']]],
-  ['insertpart_15',['InsertPart',['../parts_manipulation_8c.html#ae01dd1cdd091995b197a969eaee5fb76',1,'partsManipulation.c']]],
-  ['insertrelation_16',['InsertRelation',['../rel_manipulation_8c.html#acbebda2c4b54d419dda8339e1cad453c',1,'relManipulation.c']]],
-  ['insertsets_17',['InsertSets',['../sets_manipulation_8c.html#a09df8a0fcd718b04ea9e8d3a6cf7e709',1,'setsManipulation.c']]]
+  ['freeparts_15',['FreeParts',['../parts_manipulation_8c.html#a712e98c3079d6731c70eb254b27c5397',1,'partsManipulation.c']]],
+  ['freerelations_16',['FreeRelations',['../rel_manipulation_8c.html#ad8d4ca6d4fcf4bfa85a21d01d247e36d',1,'relManipulation.c']]],
+  ['freesets_17',['FreeSets',['../sets_manipulation_8c.html#a1fb77da53abcd0ae143fa9f378a6787d',1,'setsManipulation.c']]]
 ];

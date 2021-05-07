@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['insertcountersearch_100',['InsertCounterSearch',['../rel_search_8c.html#af08d46db4e6e0ed630272731ba869aac',1,'relSearch.c']]],
-  ['insertpart_101',['InsertPart',['../parts_manipulation_8c.html#ae01dd1cdd091995b197a969eaee5fb76',1,'partsManipulation.c']]],
-  ['insertrelation_102',['InsertRelation',['../rel_manipulation_8c.html#acbebda2c4b54d419dda8339e1cad453c',1,'relManipulation.c']]],
-  ['insertsets_103',['InsertSets',['../sets_manipulation_8c.html#a09df8a0fcd718b04ea9e8d3a6cf7e709',1,'setsManipulation.c']]]
+  ['editpartstock_99',['EditPartStock',['../parts_manipulation_8c.html#a66ec3f5c8334388bc542f093181648ae',1,'partsManipulation.c']]],
+  ['existsclass_100',['ExistsClass',['../parts_search_8c.html#a453986ccf499def704371cc948e61b6e',1,'partsSearch.c']]],
+  ['existspart_101',['ExistsPart',['../parts_search_8c.html#a73cc3af64b8ab0f995719e7b9953a4c9',1,'partsSearch.c']]],
+  ['existsset_102',['ExistsSet',['../sets_search_8c.html#a1b40f704df6b74b4c122e0257e51d119',1,'setsSearch.c']]],
+  ['existstheme_103',['ExistsTheme',['../sets_search_8c.html#a24ef62947247869d909e7089e36b5863',1,'setsSearch.c']]]
 ];

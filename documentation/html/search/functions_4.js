@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['main_110',['main',['../main_8c.html#acdef7a1fd863a6d3770c1268cb06add3',1,'main.c']]],
-  ['menu_111',['Menu',['../main_8c.html#a367ce6435dcfb6efa1deebcae126591d',1,'main.c']]],
-  ['moreused_112',['MoreUsed',['../rel_search_8c.html#aa6e4bb8f264c6db76c40299bfe6dbd5b',1,'relSearch.c']]],
-  ['moreusedpart_113',['MoreUsedPart',['../rel_search_8c.html#af60034d73540c43fd5ede764c13536c4',1,'relSearch.c']]]
+  ['insertcountersearch_107',['InsertCounterSearch',['../rel_search_8c.html#af08d46db4e6e0ed630272731ba869aac',1,'relSearch.c']]],
+  ['insertpart_108',['InsertPart',['../parts_manipulation_8c.html#ae01dd1cdd091995b197a969eaee5fb76',1,'partsManipulation.c']]],
+  ['insertrelation_109',['InsertRelation',['../rel_manipulation_8c.html#acbebda2c4b54d419dda8339e1cad453c',1,'relManipulation.c']]],
+  ['insertsets_110',['InsertSets',['../sets_manipulation_8c.html#a09df8a0fcd718b04ea9e8d3a6cf7e709',1,'setsManipulation.c']]]
 ];

@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['listparts_104',['ListParts',['../parts_show_8c.html#af5d2f6802d1247ff595e878169f7871e',1,'partsShow.c']]],
-  ['listpartsandrelations_105',['ListPartsAndRelations',['../parts_show_8c.html#acae6c6ca01877b87ae78e3faec111a1d',1,'partsShow.c']]],
-  ['listrelations_106',['ListRelations',['../rel_show_8c.html#ab290afd7de577f52d02734d96b57e712',1,'relShow.c']]],
-  ['listsets_107',['ListSets',['../sets_show_8c.html#a2d98c1bf419adbd7fdfbb70fa7d8a1a8',1,'setsShow.c']]],
-  ['listsetsnty_108',['ListSetsNTY',['../sets_show_8c.html#a56d19e900f09219d3ea0e48abaca7ab1',1,'setsShow.c']]],
-  ['lowerstring_109',['LowerString',['../list_manipulation_8c.html#a1a5bf1d19187d4dd04ff85e086773f9c',1,'listManipulation.c']]]
+  ['freeparts_104',['FreeParts',['../parts_manipulation_8c.html#a712e98c3079d6731c70eb254b27c5397',1,'partsManipulation.c']]],
+  ['freerelations_105',['FreeRelations',['../rel_manipulation_8c.html#ad8d4ca6d4fcf4bfa85a21d01d247e36d',1,'relManipulation.c']]],
+  ['freesets_106',['FreeSets',['../sets_manipulation_8c.html#a1fb77da53abcd0ae143fa9f378a6787d',1,'setsManipulation.c']]]
 ];

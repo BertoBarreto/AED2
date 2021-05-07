@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['main_26',['main',['../main_8c.html#acdef7a1fd863a6d3770c1268cb06add3',1,'main.c']]],
-  ['main_2ec_27',['main.c',['../main_8c.html',1,'']]],
-  ['menu_28',['Menu',['../main_8c.html#a367ce6435dcfb6efa1deebcae126591d',1,'main.c']]],
-  ['moreused_29',['MoreUsed',['../rel_search_8c.html#aa6e4bb8f264c6db76c40299bfe6dbd5b',1,'relSearch.c']]],
-  ['moreusedpart_30',['MoreUsedPart',['../rel_search_8c.html#af60034d73540c43fd5ede764c13536c4',1,'relSearch.c']]]
+  ['listdefinition_2ec_22',['listDefinition.c',['../list_definition_8c.html',1,'']]],
+  ['listmanipulation_2ec_23',['listManipulation.c',['../list_manipulation_8c.html',1,'']]],
+  ['listparts_24',['ListParts',['../parts_show_8c.html#af5d2f6802d1247ff595e878169f7871e',1,'partsShow.c']]],
+  ['listpartsandrelations_25',['ListPartsAndRelations',['../parts_show_8c.html#acae6c6ca01877b87ae78e3faec111a1d',1,'partsShow.c']]],
+  ['listrelations_26',['ListRelations',['../rel_show_8c.html#ab290afd7de577f52d02734d96b57e712',1,'relShow.c']]],
+  ['listsets_27',['ListSets',['../sets_show_8c.html#a2d98c1bf419adbd7fdfbb70fa7d8a1a8',1,'setsShow.c']]],
+  ['listsetsnty_28',['ListSetsNTY',['../sets_show_8c.html#a56d19e900f09219d3ea0e48abaca7ab1',1,'setsShow.c']]],
+  ['lowerstring_29',['LowerString',['../list_manipulation_8c.html#a1a5bf1d19187d4dd04ff85e086773f9c',1,'listManipulation.c']]]
 ];
