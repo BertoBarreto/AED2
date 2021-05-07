@@ -14,5 +14,6 @@ RELATIONS *OpenRelations(RELATIONS *relations);
  * Insert Data in lists *
  ************************/
 char *LowerString(char *string);
+void clean_stdin(void);
 
 #endif
