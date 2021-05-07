@@ -85,6 +85,7 @@ PARTCOUNTER *InsertCounterSearch(PARTCOUNTER *lst, char *part_num)
     {
         lst->next = InsertCounterSearch(lst->next, part_num);
     }
+    return lst;
 }
 
 /**

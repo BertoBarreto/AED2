@@ -30,6 +30,11 @@ PARTS *OpenParts(PARTS *parts)
             parts = InsertPart(parts, part_num, name, class, stock);
         }
     }
+    else
+    {
+
+        printf("\nParts file not found!");
+    }
     fclose(fp);
     return parts;
 }
@@ -61,6 +66,10 @@ SETS *OpenSets(SETS *sets)
             sets = InsertSets(sets, set_num, name, year, theme);
         }
     }
+    else
+    {
+        printf("\nSets file not found!");
+    }
     fclose(fp);
     return sets;
 }
@@ -91,6 +100,10 @@ RELATIONS *OpenRelations(RELATIONS *relations)
             fscanf(fp, "%[^\t]\t%d\t%[^\n]\n", set_num, &quantity, part_num);
             relations = InsertRelation(relations, set_num, quantity, part_num);
         }
+    }
+    else
+    {
+        printf("\nRelations file not found!");
     }
     fclose(fp);
     return relations;

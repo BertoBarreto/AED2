@@ -113,8 +113,41 @@ Functions</h2></td></tr>
 <tr class="memitem:acbebda2c4b54d419dda8339e1cad453c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rel_manipulation_8c.html#acbebda2c4b54d419dda8339e1cad453c">InsertRelation</a> (<a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *lst, char *set_num, int quantity, char *part_num)</td></tr>
 <tr class="memdesc:acbebda2c4b54d419dda8339e1cad453c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function allows to insert a set to parts relation in the relations list, returning the relations list with the new realtion inserted.  <a href="rel_manipulation_8c.html#acbebda2c4b54d419dda8339e1cad453c">More...</a><br /></td></tr>
 <tr class="separator:acbebda2c4b54d419dda8339e1cad453c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14dd962db3df7c1b17855863215cbe17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rel_manipulation_8c.html#a14dd962db3df7c1b17855863215cbe17">DeleteRelationsNode</a> (<a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *node)</td></tr>
+<tr class="memdesc:a14dd962db3df7c1b17855863215cbe17"><td class="mdescLeft">&#160;</td><td class="mdescRight">This funtion deletes a node from a relations list.  <a href="rel_manipulation_8c.html#a14dd962db3df7c1b17855863215cbe17">More...</a><br /></td></tr>
+<tr class="separator:a14dd962db3df7c1b17855863215cbe17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a913bb706080f5ae4ebfe1e00aaaefa2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rel_manipulation_8c.html#a913bb706080f5ae4ebfe1e00aaaefa2a">RemoveRelationsbySet</a> (<a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *lst, const char *set_num)</td></tr>
+<tr class="memdesc:a913bb706080f5ae4ebfe1e00aaaefa2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function removes all the relations with a specific theme.  <a href="rel_manipulation_8c.html#a913bb706080f5ae4ebfe1e00aaaefa2a">More...</a><br /></td></tr>
+<tr class="separator:a913bb706080f5ae4ebfe1e00aaaefa2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a14dd962db3df7c1b17855863215cbe17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14dd962db3df7c1b17855863215cbe17">&#9670;&nbsp;</a></span>DeleteRelationsNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a>* DeleteRelationsNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This funtion deletes a node from a relations list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>➔ node to delete </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Relations* ➔ list without the deleted node </dd></dl>
+
+</div>
+</div>
 <a id="acbebda2c4b54d419dda8339e1cad453c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acbebda2c4b54d419dda8339e1cad453c">&#9670;&nbsp;</a></span>InsertRelation()</h2>
 
@@ -166,6 +199,48 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>RELATIONS* ➔ relations list with the new insertion </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="read_files_8c.html#aac6a9729044a6b74495e9cd1a545f7a8" title="This function reads the parts_sets.tsv file and inserts its values in a relations list.">OpenRelations</a> </dd></dl>
+
+</div>
+</div>
+<a id="a913bb706080f5ae4ebfe1e00aaaefa2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a913bb706080f5ae4ebfe1e00aaaefa2a">&#9670;&nbsp;</a></span>RemoveRelationsbySet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a>* RemoveRelationsbySet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_definition_8c.html#a43621036fdf8fedcf412b6b9e4876289">RELATIONS</a> *&#160;</td>
+          <td class="paramname"><em>lst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>set_num</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function removes all the relations with a specific theme. </p>
+<p>This function iterates through the relations list checking if the actual set is the same set as the one to remove.Then it checks if there is any realtion after the actual relation and sets the next relation previous relation to the actual relation previous relation, then it checks if there is any previous relation and if there is it will set the varible next relation from the previous relation to the actual relation next relation. After all of that clutter it deletes the actual node and repeates the cycle.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lst</td><td>➔ The realtions list </td></tr>
+    <tr><td class="paramname">theme</td><td>➔ The set to delete </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Relations* ➔ List with relations removed </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="list_manipulation_8c.html#a1a5bf1d19187d4dd04ff85e086773f9c" title="This function allows to set all the string characters to lower.">LowerString</a> </dd>
+<dd>
+<a class="el" href="sets_manipulation_8c.html#afef545119351ea3cdc0f0e3cd7a61c88" title="This funtion deletes a node from a sets list.">DeleteSetsNode</a> </dd></dl>
 
 </div>
 </div>

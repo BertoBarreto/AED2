@@ -10,7 +10,7 @@ SETS *NewSetList();
 void OrderSetbyYear(SETS *lst);
 void swap(SETS *a, SETS *b);
 SETS *DeleteSetsNode(SETS *node);
-SETS *RemoveSetsbyTheme(SETS *lst, const char *theme);
+SETS *RemoveSetsbyTheme(SETS *lst, RELATIONS *rel_lst, const char *theme);
 
 /*************
 *    Show    *
