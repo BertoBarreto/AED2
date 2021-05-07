@@ -47,7 +47,10 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
     {
         partSearch = SearchPartsByNumClass(parts, rel->part_num, class);
         if (partSearch)
+        {
+
             search = InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
+        }
     }
 
     return search;

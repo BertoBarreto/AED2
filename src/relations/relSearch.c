@@ -83,8 +83,9 @@ PARTCOUNTER *InsertCounterSearch(PARTCOUNTER *lst, char *part_num)
     }
     else
     {
-        lst->next = InsertCounterSearch(lst->next, part_num);
+        lst->next = InsertCounterSearch(lst, part_num);
     }
+
     return lst;
 }
 
@@ -136,7 +137,8 @@ char *MoreUsedPart(RELATIONS *lst)
     {
         counter = InsertCounterSearch(counter, lst->part_num);
     }
-
+    printf("\nHere");
     char *part = MoreUsed(counter);
+
     return strdup(part);
 }

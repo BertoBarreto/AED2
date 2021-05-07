@@ -11,9 +11,9 @@
  */
 void ListParts(PARTS *lst)
 {
-    PARTS *aux = lst->next;
+    PARTS *aux = lst;
     printf("\nPart_num    Name  Class   Stock");
-    for (; aux != lst; aux = aux->next)
+    for (; aux; aux = aux->next)
     {
         printf("\n%s - %s - %s - %d", aux->part_num, aux->name, aux->class, aux->stock);
     }

@@ -4,12 +4,12 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-SETS *Stock_changing(SETS *lst, char theme)
+void clean_stdin(void)
 {
-    SETS *new = (SETS *)malloc(sizeof(SETS));
-    new->year = 99;
-    new->next = lst;
-    return new;
+    int c;
+    do {
+        c = getchar();
+    } while (c != '\n' && c != EOF);
 }
 
 /**
