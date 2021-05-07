@@ -250,7 +250,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
                 printf("\n%-10s   %-20s   %s", "Part_num", "Name", "Stock");
                 printf("\n%-10s - %-20s - %d", search_parts->part_num, search_parts->name, search_parts->stock);
-                printf("\nHere");
                 printf("\n(ENTER)");
                 clean_stdin();
                 getchar();
@@ -261,8 +260,12 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 #pragma region Sets_Can_Be_Built
         case 7:
 
+            t = clock();
             search_sets = SearchSetCanBuild(sets_list, relations_list, parts_list);
+            t = clock() - t;
             ListSets(search_sets);
+            double time_taken = ((double)t) / CLOCKS_PER_SEC;
+            printf("took: %f", time_taken);
             printf("\n(ENTER)");
             clean_stdin();
             getchar();
