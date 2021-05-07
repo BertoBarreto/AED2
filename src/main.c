@@ -250,7 +250,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             {
                 printf("\n%-10s   %-20s   %s", "Part_num", "Name", "Stock");
                 printf("\n%-10s - %-20s - %d", search_parts->part_num, search_parts->name, search_parts->stock);
-                printf("\nHere");
                 printf("\n(ENTER)");
                 clean_stdin();
                 getchar();
