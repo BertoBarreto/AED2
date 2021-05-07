@@ -69,7 +69,7 @@ typedef struct _part_counter
  */
 PARTCOUNTER *InsertCounterSearch(PARTCOUNTER *lst, char *part_num)
 {
-    /*if (!lst)
+    if (!lst)
     {
         PARTCOUNTER *counter = malloc(sizeof(PARTCOUNTER));
         strcpy(counter->part_num, part_num);
@@ -83,29 +83,7 @@ PARTCOUNTER *InsertCounterSearch(PARTCOUNTER *lst, char *part_num)
     }
     else
     {
-        lst->next = InsertCounterSearch(lst, part_num);
-    }*/
-    PARTCOUNTER *aux = lst;
-    bool found = false;
-    while (aux)
-    {
-        if (strcmp(part_num, lst->part_num) == 0)
-        {
-            aux->counter++;
-            found = true;
-        }
-        else
-        {
-            aux = aux->next;
-        }
-    }
-    if (found == false)
-    {
-        PARTCOUNTER *counter = malloc(sizeof(PARTCOUNTER));
-        strcpy(counter->part_num, part_num);
-        counter->counter = 1;
-        counter->next = lst;
-        lst = counter;
+        lst->next = InsertCounterSearch(lst->next, part_num);
     }
     return lst;
 }
@@ -156,6 +134,7 @@ char *MoreUsedPart(RELATIONS *lst)
 
     for (; lst; lst = lst->next)
     {
+        //printf("\nHere");
         counter = InsertCounterSearch(counter, lst->part_num);
     }
 
