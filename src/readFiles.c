@@ -1,5 +1,6 @@
 #include <header.h>
 #include <stdio.h>
+#include <string.h>
 #include <assert.h>
 #include <stdlib.h>
 #include <parts.h>
@@ -96,11 +97,12 @@ RELATIONS *OpenRelations(RELATIONS *relations)
     if (fp = fopen("LEGO-DataSet/parts_sets.tsv", "r"))
     {
         printf("\nGetting relations list...");
-        fseek(fp, 26 * sizeof(char), SEEK_SET);
+        fseek(fp, 25 * sizeof(char), SEEK_SET);
         while (!feof(fp))
         {
 
             fscanf(fp, "%[^\t]\t%d\t%[^\n]\n", set_num, &quantity, part_num);
+
             relations = InsertRelation(relations, set_num, quantity, part_num);
         }
     }
