@@ -269,10 +269,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
             printf("took: %f", time_taken);
             printf("\n(ENTER)");
             clean_stdin();
-<<<<<<< HEAD
-
-=======
->>>>>>> 18dd6aad0f9f4cd311a269472c05c0b57a8ad111
             getchar();
             break;
 #pragma endregion
@@ -281,10 +277,6 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
         case 8:
             decision = 'n';
             clean_stdin();
-<<<<<<< HEAD
-
-=======
->>>>>>> 18dd6aad0f9f4cd311a269472c05c0b57a8ad111
             printf("\n Part num:");
             scanf("%[^\n]", part_num);
             while (ExistsPart(parts_list, part_num) == false && tolower(decision) != 'y')
