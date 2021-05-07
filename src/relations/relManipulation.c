@@ -103,10 +103,23 @@ RELATIONS *RemoveRelationsbySet(RELATIONS *lst, const char *set_num)
     }
     return lst;
 }
+/*
+currentPointer = gFirst;
+while ( currentPointer ) {
+    struct Name * next = currentPointer->nextName;
+    free(currentPointer);
+    currentPointer = next;
+}
 
-void FreeRelations(RELATIONS *lst){
-    if(lst){
-        FreeRelations(lst->next);
+*/
+
+void FreeRelations(RELATIONS *lst)
+{
+
+    while (lst)
+    {
+        RELATIONS *next = lst->next;
         free(lst);
+        lst = next;
     }
 }

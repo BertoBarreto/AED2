@@ -146,9 +146,12 @@ void EditPartStock(PARTS *lst, char *part_num, int quantity)
     }
 }
 
-void FreeParts(PARTS *lst){
-    if(lst){
-        FreeParts(lst->next);
+void FreeParts(PARTS *lst)
+{
+    while (lst)
+    {
+        PARTS *next = lst->next;
         free(lst);
+        lst = next;
     }
 }

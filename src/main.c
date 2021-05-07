@@ -90,6 +90,7 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
                 fflush(stdin);
                 getchar();
             }
+            free(search_sets);
             break;
 #pragma endregion
 
@@ -491,9 +492,9 @@ void Menu(PARTS *parts_list, SETS *sets_list, RELATIONS *relations_list)
 #pragma endregion
 
         case 0:
-            free(search_parts);
-            free(search_relations);
-            free(search_sets);
+            FreeParts(search_parts);
+            FreeSets(search_sets);
+            FreeRelations(search_relations);
             exit = true;
             break;
 
@@ -517,7 +518,10 @@ void main()
 
     //experimentar o valgrind;
     Menu(parts_list, sets_list, relations_list);
+
     FreeRelations(relations_list);
+
     FreeSets(sets_list);
+
     FreeParts(parts_list);
 }
