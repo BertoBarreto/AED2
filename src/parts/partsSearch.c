@@ -52,7 +52,6 @@ PARTS *PartsSearchByClassAndSet(PARTS *parts, RELATIONS *rel, char *class)
             search = InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
         }
     }
-
     return search;
 }
 
@@ -77,7 +76,6 @@ PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
         if (partSearch)
             search = InsertPart(search, partSearch->part_num, partSearch->name, partSearch->class, partSearch->stock);
     }
-
     return search;
 }
 
@@ -91,14 +89,12 @@ PARTS *PartsSearchBySet(PARTS *parts, RELATIONS *rel)
 PARTS *SearchPartsByNum(PARTS *parts, char *part_num)
 {
     PARTS *aux = parts;
-    PARTS *auxSearch = NULL;
     for (; aux; aux = aux->next)
     {
 
         if (strcmp(part_num, aux->part_num) == 0)
         {
-            auxSearch = InsertPart(auxSearch, aux->part_num, aux->name, aux->class, aux->stock);
-            return auxSearch;
+            return aux;
         }
     }
     return NULL;
